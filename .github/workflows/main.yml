@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  anyone-validate-fs:
+    runs-on: ubuntu-latest
+    name: when push, validate 'sample_folder' structure as we expected
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: validate-fs
+        uses: ./
+        id: validation
+        with:
+          brace-expansion: "{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}"
+          ignore-files: "README.md"
+          ignore-directories: ".git"
+          read-path: "./sample_folder"

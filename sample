@@ -1,0 +1,20 @@
+input:
+{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}
+
+output:
+[
+  'a/a.qa.config',
+  'a/b.prd.config',
+  'b/ba1/a.qa.config',
+  'b/ba1/b.prd.config',
+  'b/ba2/a.qa.config',
+  'b/ba2/b.prd.config',
+  'b/bb1/a.qa.config',
+  'b/bb1/b.prd.config',
+  'b/bb2/a.qa.config',
+  'b/bb2/b.prd.config',
+  'c/a.qa.config',
+  'c/b.prd.config',
+  'd/a.qa.config',
+  'd/b.prd.config'
+]

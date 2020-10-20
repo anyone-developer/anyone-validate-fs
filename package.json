@@ -1,0 +1,26 @@
+{
+  "name": "anyone-validate-directory",
+  "version": "1.0.0",
+  "description": "Free github app. Used for integration in Github Action. Triggered when PR created or edited. There must be someone approve your PR. Otherwise, the PR will be set failed.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nzhang4-sh/anyone-validate-directory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nzhang4-sh/anyone-validate-directory/issues"
+  },
+  "homepage": "https://github.com/nzhang4-sh/anyone-validate-directory#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "braces": "^3.0.2",
+    "rrdir": "^8.2.0"
+  }
+}

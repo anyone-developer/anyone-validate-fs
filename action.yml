@@ -1,0 +1,25 @@
+name: 'anyone-validate-fs'
+description: 'Validate repository file structure as we expected'
+inputs:
+  brace-expansion:  
+    description: 'brace-expansion of expected directory structure'
+    required: true
+    default: ''
+  ignore-files:  
+    description: 'the files you want to ignore. split with comma.'
+    required: false
+    default: ''
+  ignore-directories:  
+    description: 'the directories you want to ignore. split with comma.'
+    required: false
+    default: ''
+  read-path:
+    description: 'the path that you assign to read.'
+    required: false
+    default: './'
+outputs:
+  output:
+    description: 'output of execution'
+runs:
+  using: 'node12'
+  main: 'index.js'
