@@ -1,7 +1,7 @@
 {
   "name": "anyone-validate-directory",
   "version": "1.0.0",
-  "description": "Free github app. Used for integration in Github Action. Triggered when PR created or edited. There must be someone approve your PR. Otherwise, the PR will be set failed.",
+  "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

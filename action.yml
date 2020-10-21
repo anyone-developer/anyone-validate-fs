@@ -1,4 +1,8 @@
 name: 'anyone-validate-fs'
+author: 'Zhang Nan (zhang_nan_163@163.com)'
+branding:
+  icon: folder
+  color: white
 description: 'Validate repository file structure as we expected'
 inputs:
   brace-expansion:  
