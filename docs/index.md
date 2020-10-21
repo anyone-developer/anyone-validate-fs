@@ -1,37 +1,52 @@
-## Welcome to GitHub Pages
+# anyone-validate-fs
 
-You can use the [editor on GitHub](https://github.com/nzhang4-sh/anyone-validate-fs/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+*If you like my module, please buy me a coffee.*
 
-### Markdown
+*More and more tiny and useful github actions modules are on the way. Please donate to me. I accept part time job contract. if you need, please contact me: zhang_nan_163@163.com*
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Inputs
 
-```markdown
-Syntax highlighted code block
+### `brace-expansion`
 
-# Header 1
-## Header 2
-### Header 3
+**Required** brace-expansion of expected directory structure.
 
-- Bulleted
-- List
+### `ignore-files`
 
-1. Numbered
-2. List
+the files you want to ignore. split with comma.
 
-**Bold** and _Italic_ and `Code` text
+### `ignore-directories`
 
-[Link](url) and ![Image](src)
+the directories you want to ignore. split with comma.
+
+### `read-path`
+
+the path that you assign to read.
+
+## Outputs
+
+### `output`
+
+output of execution.
+
+## Example usage
+
+```
+uses: nzhang4-sh/anyone-validate-fs@v1.0
+with:
+  brace-expansion: '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}'
+  ignore-files: 'README.md'
+  ignore-directories: '.git'
+  read-path: './'
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Donation
 
-### Jekyll Themes
+PalPal: https://paypal.me/nzhang4
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nzhang4-sh/anyone-validate-fs/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+<img src="../misc/alipay.JPG" width="500">
 
-### Support or Contact
+<img src="../misc/webchat_pay.JPG" width="500">
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
