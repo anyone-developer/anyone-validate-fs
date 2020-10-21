@@ -47,8 +47,8 @@ with:
 
 PalPal: https://paypal.me/nzhang4
 
-<img src="./misc/alipay.JPG" width="500">
+<img src="../misc/alipay.JPG" width="500">
 
-<img src="./misc/webchat_pay.JPG" width="500">
+<img src="../misc/webchat_pay.JPG" width="500">
 
 
