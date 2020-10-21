@@ -1,4 +1,4 @@
-name: anyone-ci
+name: nightly-build
 on: [push]
 jobs:
   anyone-validate-fs:
