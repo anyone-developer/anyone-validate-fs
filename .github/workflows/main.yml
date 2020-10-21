@@ -1,5 +1,5 @@
+name: anyone-ci
 on: [push]
-
 jobs:
   anyone-validate-fs:
     runs-on: ubuntu-latest
