@@ -1,12 +1,13 @@
 name: nightly-build
 on: [push]
 jobs:
-  anyone-validate-fs:
+  test-github-actions-locally:
     runs-on: ubuntu-latest
-    name: when push, validate 'sample_folder' structure as we expected
+    name: run sample test locally
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      - run: npm ci
       - name: validate-fs
         uses: ./
         id: validation

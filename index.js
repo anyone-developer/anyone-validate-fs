@@ -47,6 +47,11 @@ try {
   // const readPath = './sample_folder';
   const expansion = core.getInput('brace-expansion');
   // const expansion = '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}';
+  const ignoreFiles = core.getInput('ignore-files').split(',');
+  // const ignoreFiles = "README.md".split(",");
+  const ignoreDirectories = core.getInput('ignore-directories').split(',');
+  // const ignoreDirectories = ".git".split(",");
+
   if(!expansion)
   {
     core.setFailed("param 'brace-expansion' is required");
@@ -60,10 +65,6 @@ try {
   {
     core.info("expected path: " + p);
   }
-  const ignoreFiles = core.getInput('ignore-files').split(',');
-  // const ignoreFiles = "README.md".split(",");
-  const ignoreDirectories = core.getInput('ignore-directories').split(',');
-  // const ignoreDirectories = ".git".split(",");
 
   const validatePath = readPath;
   if(!fs.existsSync(validatePath))
