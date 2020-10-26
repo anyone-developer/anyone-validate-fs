@@ -1,18 +1,27 @@
 {
-  "name": "anyone-validate-directory",
+  "name": "anyone-validate-fs",
   "version": "1.0.0",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
-  "main": "index.js",
+  "main": "src/test.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node src/test.js",
+    "link": "npm link --force",
+    "cli": "anyone-validate-fs"
+  },
+  "bin": {
+    "anyone-validate-fs": "bin/anyone-validate-fs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nzhang4-sh/anyone-validate-directory.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cli",
+    "anyone-validate-fs",
+    "anyone-developer"
+  ],
+  "author": "Zhang Nan (zhang_nan_163@163.com)",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/nzhang4-sh/anyone-validate-directory/issues"
   },
@@ -20,8 +29,14 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
+    "args": "^5.0.1",
     "braces": "^3.0.2",
     "chalk": "^4.1.0",
+    "esm": "^3.2.25",
     "rrdir": "^8.2.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {}
 }
