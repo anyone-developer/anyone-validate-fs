@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nzhang4-sh/anyone-validate-directory.git"
+    "url": "git+https://github.com/anyone-developer/anyone-validate-fs.git"
   },
   "keywords": [
     "cli",
@@ -23,9 +23,9 @@
   "author": "Zhang Nan (zhang_nan_163@163.com)",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/nzhang4-sh/anyone-validate-directory/issues"
+    "url": "https://github.com/anyone-developer/anyone-validate-fs/issues"
   },
-  "homepage": "https://github.com/nzhang4-sh/anyone-validate-directory#readme",
+  "homepage": "https://github.com/anyone-developer/anyone-validate-fs#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
