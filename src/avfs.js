@@ -49,10 +49,7 @@ const avfs = function (
         logger.error(chalk.red("param 'brace-expansion' is required"));
         reject({
           type: "insufficient param",
-          message: "param 'brace-expansion' is required",
-          expectCount: expectCount,
-          matchCount: matchCount,
-          unmatchCount: unmatchCount
+          message: "param 'brace-expansion' is required"
         });
         return;
       }
@@ -70,10 +67,7 @@ const avfs = function (
         logger.error(chalk.red("the path: " + validatePath + " was not existed"));
         reject({
           type: "insufficient param",
-          message: "the path: " + validatePath + " was not existed",
-          expectCount: expectCount,
-          matchCount: matchCount,
-          unmatchCount: unmatchCount
+          message: "the path: " + validatePath + " was not existed"
         });
         return;
       }
@@ -103,13 +97,6 @@ const avfs = function (
 
         if (!oneOfItemEndsWithPath(entry.path, expectStructure)) {
           logger.error(chalk.red("unexpected path: " + entry.path));
-          reject({
-            type: "insufficient param",
-            message: "unexpected path: " + entry.path,
-            expectCount: expectCount,
-            matchCount: matchCount,
-            unmatchCount: unmatchCount
-          });
           unmatchCount++;
           continue;
         }
@@ -119,17 +106,23 @@ const avfs = function (
       logger.error(chalk.red(error.message));
       reject({
         type: error,
-        message: error.message,
-        expectCount: expectCount,
-        matchCount: matchCount,
-        unmatchCount: unmatchCount
+        message: error.message
       });
     } finally {
-      resolve({
-        expectCount: expectCount,
-        matchCount: matchCount,
-        unmatchCount: unmatchCount
-      });
+      if (unmatchCount > expectCount || unmatchCount > 0) {
+        reject({
+          expectCount: expectCount,
+          matchCount: matchCount,
+          unmatchCount: unmatchCount
+        });
+      }
+      else {
+        resolve({
+          expectCount: expectCount,
+          matchCount: matchCount,
+          unmatchCount: unmatchCount
+        });
+      }
     }
   });
 }

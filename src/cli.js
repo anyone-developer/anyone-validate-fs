@@ -20,9 +20,14 @@ export function cli(args) {
       output = `expect: ${resolve.expectCount} match/unmatch: ${resolve.matchCount}/${resolve.unmatchCount}`;
       console.info(chalk.green.bgYellow.bold(output));
     }, (reject) => {
-      output = `expect: ${reject.expectCount} match/unmatch: ${reject.matchCount}/${reject.unmatchCount}`;
-      console.error(chalk.red.bgYellow.bold(output));
-      console.error(`error message: ${reject.message}`);
+      if (reject.type) {
+        console.error(chalk.red.bgYellow.bold(output));
+        console.error(`error message: ${reject.message}`);
+      }
+      else {
+        output = `expect: ${reject.expectCount} match/unmatch: ${reject.matchCount}/${reject.unmatchCount}`;
+        console.info(chalk.red.bgYellow.bold(output));
+      }
     });
   }
   else {
