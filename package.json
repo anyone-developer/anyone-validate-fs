@@ -4,7 +4,7 @@
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "braces": "^3.0.2",
+    "chalk": "^4.1.0",
     "rrdir": "^8.2.0"
   }
 }
