@@ -7,6 +7,7 @@
     "test": "node src/test.js",
     "link": "npm link --force",
     "cli": "anyone-validate-fs",
+    "release": "release-it",
     "publish": "npm publish --access=public"
   },
   "bin": {
