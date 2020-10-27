@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 let output = "";
 avfs().then((resolve) => {
-  output = `expect: ${resolve.expectCount} match/unmatch: ${resolve.matchCount}/${resolve.unmatchCount}`;
+  output = `expect/match/unmatch: ${resolve.expectCount}/${resolve.matchCount}/${resolve.unmatchCount}`;
   console.info(chalk.green.bgYellow.bold(output));
 }, (reject) => {
   if (reject.type) {
@@ -11,7 +11,7 @@ avfs().then((resolve) => {
     console.error(`error message: ${reject.message}`);
   }
   else {
-    output = `expect: ${reject.expectCount} match/unmatch: ${reject.matchCount}/${reject.unmatchCount}`;
+    output = `expect/match/unmatch: ${reject.expectCount}/${reject.matchCount}/${reject.unmatchCount}`;
     console.info(chalk.red.bgYellow.bold(output));
   }
 });
