@@ -3,8 +3,12 @@ const fs = require('fs');
 const path = require('path');
 const rrdir = require('rrdir');
 const chalk = require('chalk');
+const expectArray = [];
+const actualArray = [];
+
 let directoryPath = [];
 let actualPath = [];
+
 let expectCount = 0;
 let matchCount = 0;
 let unmatchCount = 0;
@@ -31,16 +35,35 @@ function oneOfItemEndsWithPath(path, array) {
   return false;
 }
 
-function getAllExpectedPathRecursively(array) {
-  const next = [...new Set(array.map(i => path.dirname(i)))].filter(i => i != ".");
-  if (next.length <= 0)
-    return [...array];
-  return [...array, ...getAllExpectedPathRecursively(next)];
+function getNextPath(array, linkedArray) {
+  const nextArray = array.map(i => {
+    const next = getNextLevelPath(i.path);
+    if (next)
+      return {
+        path: next
+      }
+    return null;
+  }).filter(i => i != null);
+  if (nextArray.length) {
+    linkedArray.push(nextArray);
+    getNextPath(nextArray, linkedArray);
+  }
+  else {
+    return [];
+  }
+}
+
+function getNextLevelPath(path) {
+  let paths = path.split('\\');
+  if (paths.length > 1) {
+    return paths.slice(1).join('\\');
+  }
+  return null;
 }
 
 const avfs = function (
   readPath = './sample_folder',
-  expansion = '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}',
+  expansion = '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},x/p/a/b/c}',
   ignoreFiles = ["README.md"],
   ignoreDirectories = [".git"]) {
   return new Promise((resolve, reject) => {
@@ -53,13 +76,18 @@ const avfs = function (
         });
         return;
       }
-      let expectStructure = braces(expansion, { expand: true });
+      const expectStructure = braces(expansion, { expand: true }).map(i => {
+        return { path: path.normalize(i) };
+      });
 
-      expectStructure = getAllExpectedPathRecursively(expectStructure);
-
-      for (const p of expectStructure) {
-        expectCount++;
-        logger.info(chalk.blue("expected path: " + p));
+      expectArray.push(expectStructure);
+      getNextPath(expectStructure, expectArray);
+      for (const layer of expectArray) {
+        for (const p of layer)
+        {
+          expectCount++;
+          logger.info(chalk.blue("expected path: " + p.path + " in layer: " + expectArray.indexOf(layer)));
+        }
       }
 
       const validatePath = readPath;
