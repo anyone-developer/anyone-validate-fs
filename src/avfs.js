@@ -3,26 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const rrdir = require('rrdir');
 const chalk = require('chalk');
-const expectArray = [];
-const actualArray = [];
-
-let directoryPath = [];
-let actualPath = [];
+const treeify = require('treeify');
+let Table = require('tty-table');
 
 let expectCount = 0;
 let matchCount = 0;
 let unmatchCount = 0;
 let logger = global.logger ? global.logger : console;
-
-function belongToIgnoreDirectory(entry) {
-  for (const dp of directoryPath) {
-    if (entry.path.startsWith(dp)) {
-      logger.info(chalk.gray("the " + (entry.directory ? "directory" : "file") + ": " + path.basename(entry.path) + " belong to ignored directory: " + path.dirname(entry.path)));
-      return true;
-    }
-  }
-  return false;
-}
 
 function oneOfItemEndsWithPath(path, array) {
   for (const e of array) {
@@ -35,22 +22,8 @@ function oneOfItemEndsWithPath(path, array) {
   return false;
 }
 
-function getNextPath(array, linkedArray) {
-  const nextArray = array.map(i => {
-    const next = getNextLevelPath(i.path);
-    if (next)
-      return {
-        path: next
-      }
-    return null;
-  }).filter(i => i != null);
-  if (nextArray.length) {
-    linkedArray.push(nextArray);
-    getNextPath(nextArray, linkedArray);
-  }
-  else {
-    return [];
-  }
+function getNextPath(path) {
+  return path.split('\\').slice(1).join('\\');
 }
 
 function getNextLevelPath(path) {
@@ -61,11 +34,32 @@ function getNextLevelPath(path) {
   return null;
 }
 
+function getTopLevelPath(path) {
+  return path.split('\\')[0];
+}
+
+function getTreeNode(array) {
+  let object = {};
+  for (const a of array) {
+    const top = getTopLevelPath(a);
+    const next = getNextLevelPath(a);
+    if (!next) {
+      object[top] = "file";
+      continue;
+    }
+    const subArray = array.filter(i => i.startsWith(top)).map(i => getNextLevelPath(i));
+    if (!object.hasOwnProperty(top)) {
+      object[top] = { ...getTreeNode(subArray) };
+    }
+  }
+  return object;
+}
+
 const avfs = function (
-  readPath = './sample_folder',
-  expansion = '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},x/p/a/b/c}',
-  ignoreFiles = ["README.md"],
-  ignoreDirectories = [".git"]) {
+  readPath = 'sample_folder',
+  expansion = '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},x/p/a/b/c/{a.qa.config,a.prd.config}}',
+  ignoreFiles = "README.md",
+  ignoreDirectories = ".git") {
   return new Promise((resolve, reject) => {
     try {
       if (!expansion) {
@@ -76,60 +70,72 @@ const avfs = function (
         });
         return;
       }
+
+      readPath = path.normalize(readPath);
+      const ignoreFilesArray = ignoreFiles.split(',').map(i => path.normalize(readPath + "\\" + i));
+      const ignoreDirectoriesArray = ignoreDirectories.split(',').map(i => path.normalize(readPath + "\\" + i));
+
       const expectStructure = braces(expansion, { expand: true }).map(i => {
-        return { path: path.normalize(i) };
+        return path.normalize(i);
       });
 
-      expectArray.push(expectStructure);
-      getNextPath(expectStructure, expectArray);
-      for (const layer of expectArray) {
-        for (const p of layer)
-        {
-          expectCount++;
-          logger.info(chalk.blue("expected path: " + p.path + " in layer: " + expectArray.indexOf(layer)));
-        }
-      }
+      const expectTree = getTreeNode(expectStructure);
 
-      const validatePath = readPath;
-      if (!fs.existsSync(validatePath)) {
-        logger.error(chalk.red("the path: " + validatePath + " was not existed"));
+      const expectTreeHeader = chalk.blueBright.bgYellowBright.bold("[Expect]");
+      const expectTreeSubHeader = chalk.blueBright.bold("brace-expansion");
+      const expectTreeContent = chalk.blue(treeify.asTree(expectTree));
+      // logger.info(expectTreeHeader);
+      // logger.info(expectTreeContent);
+
+      if (!fs.existsSync(readPath)) {
+        logger.error(chalk.red("the path: " + readPath + " was not existed"));
         reject({
           type: "insufficient param",
-          message: "the path: " + validatePath + " was not existed"
+          message: "the path: " + readPath + " was not existed"
         });
         return;
       }
 
-      actualPath = rrdir.sync(validatePath);
+      let actualPath = rrdir.sync(readPath, {
+        exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
+        strict: true
+      });
 
-      actualPath.forEach((v, i) => actualPath[i].path = v.path.replace(/\\/g, "/"));
+      actualPath = actualPath.map(i => {
+        return {
+          path: getNextPath(path.normalize(i.path)),
+          directory: i.directory,
+          symlink: i.symlink
+        }
+      }).filter(i => !i.directory);
+      actualPath = [...actualPath.map(i => i.path)];
+      const actualTree = getTreeNode(actualPath);
 
-      for (const entry of actualPath) {
-        if (entry.directory) {
-          if (ignoreDirectories.includes(path.basename(entry.path))) {
-            logger.info(chalk.gray("find ignored directory: " + path.basename(entry.path)));
-            directoryPath.push(entry.path);
-            continue;
-          }
-          if (belongToIgnoreDirectory(entry))
-            continue;
-        }
-        else {
-          if (ignoreFiles.includes(path.basename(entry.path))) {
-            logger.info(chalk.gray("find ignored file: " + entry.path));
-            continue;
-          }
-          if (belongToIgnoreDirectory(entry))
-            continue;
-        }
+      const actualTreeHeader = chalk.greenBright.bgYellowBright.bold("[Actual]");
+      const actualTreeSubHeader = chalk.greenBright.bold("under: " + readPath);
+      const actualTreeContent = chalk.green(treeify.asTree(actualTree));
 
-        if (!oneOfItemEndsWithPath(entry.path, expectStructure)) {
-          logger.error(chalk.red("unexpected path: " + entry.path));
-          unmatchCount++;
-          continue;
-        }
-        matchCount++;
-      }
+      const out = Table([
+        {
+          value: expectTreeHeader
+        },
+        {
+          value: actualTreeHeader
+        }], 
+        [
+          [expectTreeSubHeader, actualTreeSubHeader],
+          [expectTreeContent, actualTreeContent]
+        ], 
+        {
+          borderStyle: "solid",
+          borderColor: "gray",
+          headerAlign: "center",
+          align: "left",
+          color: "white",
+          width: "100%"
+        }).render();
+      console.log(out);
+      
     } catch (error) {
       logger.error(chalk.red(error.message));
       reject({

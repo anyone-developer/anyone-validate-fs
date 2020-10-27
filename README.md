@@ -40,7 +40,7 @@ with:
   brace-expansion: '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}'
   ignore-files: 'README.md'
   ignore-directories: '.git'
-  read-path: './'
+  read-path: 'sample_folder'
 ```
 
 ## Donation

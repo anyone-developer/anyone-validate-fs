@@ -1,20 +1,47 @@
-const braces = require('braces');
+// const braces = require('braces');
 const path = require('path');
-let expectStructure = braces('{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}', { expand: true });
-console.log(expectStructure);
-expectStructure = expectStructure.map(i => {
-    return {
-        path: path.normalize(i)
-    };
-});
+// let expectStructure = braces('{q,{a,b/{ba1,ba2,bb1,bb2},c,d}/{x,y/z}}', { expand: true });
+// expectStructure = expectStructure.map(i => {
+//     return path.normalize(i);
+// });
+// console.log(expectStructure);
 
-console.log(expectStructure);
-
-// const rrdir = require("rrdir");
-
-// for (const entry of rrdir.sync(`sample_folder\\b`)) {
-//     console.log(path.normalize(entry.path));
+// function getNextLevelPath(path) {
+//     let paths = path.split('\\');
+//     if (paths.length > 1) {
+//         return paths.slice(1).join('\\');
+//     }
+//     return null;
 // }
+
+// function getTopLevelPath(path) {
+//     return path.split('\\')[0];
+// }
+
+// function getTreeNode(array) {
+//     let object = {};
+//     for (const a of array) {
+//         const top = getTopLevelPath(a);
+//         const next = getNextLevelPath(a);
+//         if(!next)
+//         {
+//             object[top] = null;
+//             continue;
+//         }
+//         const subArray = array.filter(i => i.startsWith(top)).map(i => getNextLevelPath(i));
+//         if (!object.hasOwnProperty(top)) {
+//             object[top] = { ...getTreeNode(subArray) };
+//         }
+//     }
+//     return object;
+// }
+// const obj = getTreeNode(expectStructure);
+// console.log("break");
+const rrdir = require("rrdir");
+
+for (const entry of rrdir.sync(`sample_folder\\b`)) {
+    console.log(entry);
+}
 
 // const path = require('path');
 
