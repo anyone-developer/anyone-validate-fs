@@ -90,15 +90,9 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
       }).filter(i => !i.directory);
       actualPath = [...actualPath.map(i => i.path)];
       const actualTree = getTreeNode(actualPath);
-      console.log("tree node");
-      console.log(actualTree);
-
       const actualTreeHeader = chalk.greenBright.bgYellowBright.bold("[Actual]");
       const actualTreeSubHeader = chalk.greenBright.bold("under: " + readPath);
       const actualTreeContent = chalk.green(treeify.asTree(actualTree));
-
-      console.log("tree content");
-      console.log(actualTreeContent);
 
       this.delta = rdiff.getDiff(actualTree, expectTree);
       function* diffRows(obj) {

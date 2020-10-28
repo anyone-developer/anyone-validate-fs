@@ -30,4 +30,4 @@ outputs:
     description: 'output of execution'
 runs:
   using: 'node12'
-  main: './src/action.js'
+  main: './action.js'
