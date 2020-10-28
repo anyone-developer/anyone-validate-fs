@@ -5,6 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     name: run sample test locally
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - run: npm ci
       - name: validate-fs
         uses: ./
         id: validation
@@ -22,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
       - run: npm ci
       - name: validate-fs
-        uses: anyone-developer/anyone-validate-fs@latest
+        uses: anyone-developer/anyone-validate-fs@1.0
         id: validation
         with:
           brace-expansion: "{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}"

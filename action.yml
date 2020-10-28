@@ -20,7 +20,11 @@ inputs:
   read-path:
     description: 'the path that you assign to read.'
     required: false
-    default: './'
+    default: ''
+  render-layout:
+    description: 'render diff result with "vertical" or "horizontal"'
+    required: false
+    default: 'vertical'
 outputs:
   output:
     description: 'output of execution'
