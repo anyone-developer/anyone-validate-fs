@@ -15,7 +15,7 @@ function parseArgumentsIntoOptions(rawArgs) {
 export function cli(args) {
   let options = parseArgumentsIntoOptions(args);
   if (options.braceExpansion) {
-    avfs.setRenderLayout(renderLayout).diff(
+    avfs.setRenderLayout(options.renderLayout).diff(
       options.readPath,
       options.braceExpansion,
       options.ignoreFiles,
