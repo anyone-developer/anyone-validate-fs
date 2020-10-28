@@ -8,8 +8,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - run: npm ci
-      - run: pwd
-      - run: ls -al
       - name: validate-fs
         uses: ./
         id: validation

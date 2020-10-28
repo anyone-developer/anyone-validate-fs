@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { avfs } = require("./avfs.js");
+const { avfs } = require("./src/avfs.js");
 
 global.logger = core;
 avfs.setRenderLayout(core.getInput('render-layout')).diff(
