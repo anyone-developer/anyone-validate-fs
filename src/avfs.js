@@ -13,16 +13,16 @@ function getNextPath(p) {
   return p.split(path.sep).slice(1).join(path.sep);
 }
 
-function getNextLevelPath(path) {
-  let paths = path.split(path.sep);
+function getNextLevelPath(p) {
+  let paths = p.split(path.sep);
   if (paths.length > 1) {
     return paths.slice(1).join(path.sep);
   }
   return null;
 }
 
-function getTopLevelPath(path) {
-  return path.split(path.sep)[0];
+function getTopLevelPath(p) {
+  return p.split(path.sep)[0];
 }
 
 function getTreeNode(array) {
@@ -87,8 +87,7 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
           directory: i.directory,
           symlink: i.symlink
         }
-      });
-      actualPath = actualPath.filter(i => !i.directory);
+      }).filter(i => !i.directory);
       actualPath = [...actualPath.map(i => i.path)];
       const actualTree = getTreeNode(actualPath);
       const actualTreeHeader = chalk.greenBright.bgYellowBright.bold("[Actual]");
