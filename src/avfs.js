@@ -89,10 +89,15 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
           directory: i.directory,
           symlink: i.symlink
         }
-      }).filter(i => !i.directory);
+      });
       console.log("step1--->");
       console.log(actualPath);
 
+      actualPath = actualPath.filter(i => !i.directory);
+
+      console.log("step2--->");
+      console.log(actualPath);
+      
       actualPath = [...actualPath.map(i => i.path)];
       console.log("after--->");
       console.log(actualPath);
