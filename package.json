@@ -26,9 +26,6 @@
   "bugs": {
     "url": "https://github.com/anyone-developer/anyone-validate-fs/issues"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "homepage": "https://github.com/anyone-developer/anyone-validate-fs#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
