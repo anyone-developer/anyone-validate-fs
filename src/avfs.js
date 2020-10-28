@@ -219,14 +219,14 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         message: error.message
       });
     } finally {
-      if (this.delta) {
+      if (this.delta && this.delta.length > 0) {
         reject({
           diff: JSON.stringify(this.delta)
         });
       }
       else {
         resolve({
-          diff: this.data
+          diff: chalk.greenBright.bgYellowBright("[success] file structures are all matched!")
         });
       }
     }

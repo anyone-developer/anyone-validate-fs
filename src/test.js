@@ -2,7 +2,7 @@ const { avfs } = require("./avfs.js");
 
 avfs.setRenderLayout("vertical").diff(
   './sample_folder',
-  '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},{x,y}/p/a/b/c/{a.qa.config,a.prd.config}}',
+  '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}',
   "README.md",
   ".git"
 ).then((resolve) => {
