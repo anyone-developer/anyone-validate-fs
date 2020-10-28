@@ -52,8 +52,7 @@ with:
 
 PalPal: https://paypal.me/nzhang4
 
-<img src="../misc/alipay.JPG" width="500">
+<img src="https://raw.githubusercontent.com/anyone-developer/anyone-validate-fs/main/misc/alipay.JPG" width="500">
 
-<img src="../misc/webchat_pay.JPG" width="500">
-
+<img src="https://raw.githubusercontent.com/anyone-developer/anyone-validate-fs/main/misc/webchat_pay.JPG" width="500">
 
