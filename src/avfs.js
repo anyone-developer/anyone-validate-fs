@@ -42,11 +42,7 @@ function getTreeNode(array) {
   return object;
 }
 
-module.exports.diff = function (
-  readPath = 'sample_folder',
-  expansion = '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},{x,y}/p/a/b/c/{a.qa.config,a.prd.config}}',
-  ignoreFiles = "README.md",
-  ignoreDirectories = ".git") {
+module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirectories) {
   return new Promise((resolve, reject) => {
     try {
       if (!expansion) {
@@ -71,8 +67,6 @@ module.exports.diff = function (
       const expectTreeHeader = chalk.blueBright.bgYellowBright.bold("[Expect]");
       const expectTreeSubHeader = chalk.blueBright.bold("brace-expansion");
       const expectTreeContent = chalk.blue(treeify.asTree(expectTree));
-      // this.logger.info(expectTreeHeader);
-      // this.logger.info(expectTreeContent);
 
       if (!fs.existsSync(readPath)) {
         this.logger.error(chalk.red("the path: " + readPath + " was not existed"));
@@ -152,52 +146,52 @@ module.exports.diff = function (
         let out = Table([
           { value: actualTreeHeader }
         ],
-        [
-          [actualTreeSubHeader],
-          [actualTreeContent]
-        ],
-        {
-          borderStyle: "solid",
-          borderColor: "gray",
-          headerAlign: "center",
-          align: "left",
-          color: "white",
-          width: "100%"
-        }).render();
+          [
+            [actualTreeSubHeader],
+            [actualTreeContent]
+          ],
+          {
+            borderStyle: "solid",
+            borderColor: "gray",
+            headerAlign: "center",
+            align: "left",
+            color: "white",
+            width: "100%"
+          }).render();
         this.logger.log(out);
 
         out = Table([
           { value: expectTreeHeader }
         ],
-        [
-          [expectTreeSubHeader],
-          [expectTreeContent]
-        ],
-        {
-          borderStyle: "solid",
-          borderColor: "gray",
-          headerAlign: "center",
-          align: "left",
-          color: "white",
-          width: "100%"
-        }).render();
+          [
+            [expectTreeSubHeader],
+            [expectTreeContent]
+          ],
+          {
+            borderStyle: "solid",
+            borderColor: "gray",
+            headerAlign: "center",
+            align: "left",
+            color: "white",
+            width: "100%"
+          }).render();
         this.logger.log(out);
 
         out = Table([
           { value: diffTreeHeader }
         ],
-        [
-          [diffTreeSubHeader],
-          [diffTreeContent]
-        ],
-        {
-          borderStyle: "solid",
-          borderColor: "gray",
-          headerAlign: "center",
-          align: "left",
-          color: "white",
-          width: "100%"
-        }).render();
+          [
+            [diffTreeSubHeader],
+            [diffTreeContent]
+          ],
+          {
+            borderStyle: "solid",
+            borderColor: "gray",
+            headerAlign: "center",
+            align: "left",
+            color: "white",
+            width: "100%"
+          }).render();
         this.logger.log(out);
       }
       else {
@@ -218,7 +212,7 @@ module.exports.diff = function (
             width: "100%"
           }).render();
 
-          this.logger.log(out);
+        this.logger.log(out);
       }
     } catch (error) {
       this.logger.error(chalk.red(error.message));

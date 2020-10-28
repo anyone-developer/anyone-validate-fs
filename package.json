@@ -4,7 +4,6 @@
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "scripts": {
-    "test-action": "node action.js",
     "test": "node src/test.js",
     "link": "npm link --force",
     "cli": "anyone-validate-fs",

@@ -15,7 +15,12 @@ function parseArgumentsIntoOptions(rawArgs) {
 export function cli(args) {
   let options = parseArgumentsIntoOptions(args);
   if (options.braceExpansion) {
-    avfs.setRenderLayout(renderLayout).diff().then((resolve) => {
+    avfs.setRenderLayout(renderLayout).diff(
+      options.readPath,
+      options.braceExpansion,
+      options.ignoreFiles,
+      options.ignoreDirectories
+    ).then((resolve) => {
       console.info(resolve.diff);
     }, (reject) => {
       if (reject.type && reject.message) {
