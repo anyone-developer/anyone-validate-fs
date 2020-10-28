@@ -81,6 +81,8 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
         strict: true
       });
+      console.log("before--->");
+      console.log(actualPath);
       actualPath = actualPath.map(i => {
         return {
           path: getNextPath(path.normalize(i.path)),
@@ -89,6 +91,8 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         }
       }).filter(i => !i.directory);
       actualPath = [...actualPath.map(i => i.path)];
+      console.log("after--->");
+      console.log(actualPath);
       const actualTree = getTreeNode(actualPath);
       const actualTreeHeader = chalk.greenBright.bgYellowBright.bold("[Actual]");
       const actualTreeSubHeader = chalk.greenBright.bold("under: " + readPath);
