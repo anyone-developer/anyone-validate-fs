@@ -77,11 +77,12 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         return;
       }
 
+      console.log("debug---------->readPath: " + readPath);
       let actualPath = rrdir.sync(readPath, {
         exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
         strict: true
       });
-
+      console.log(actualPath);
       actualPath = actualPath.map(i => {
         return {
           path: getNextPath(path.normalize(i.path)),
