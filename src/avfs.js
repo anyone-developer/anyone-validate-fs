@@ -9,9 +9,9 @@ const rdiff = require('recursive-diff');
 
 this.logger = global.logger ? global.logger : console;
 
-function getNextPath(path) {
-  console.log("getNextPath:" + path);
-  return path.split(path.sep).slice(1).join(path.sep);
+function getNextPath(p) {
+  console.log("getNextPath:" + p);
+  return p.split(path.sep).slice(1).join(path.sep);
 }
 
 function getNextLevelPath(path) {
