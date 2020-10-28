@@ -26,6 +26,10 @@ the directories you want to ignore. split with comma.
 
 the path that you assign to read.
 
+### `render-layout`
+
+render diff result with \'vertical\' or \'horizontal\'
+
 ## Outputs
 
 ### `output`
@@ -41,6 +45,7 @@ with:
   ignore-files: 'README.md'
   ignore-directories: '.git'
   read-path: 'sample_folder'
+  render-layout: 'horizontal'
 ```
 
 ## Donation

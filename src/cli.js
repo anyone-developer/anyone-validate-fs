@@ -1,13 +1,13 @@
 import arg from 'args';
-import avfs from "./avfs";
-import chalk from 'chalk';
+import { avfs } from "./avfs";
 
 function parseArgumentsIntoOptions(rawArgs) {
   arg
     .option('brace-expansion', '[Required] brace-expansion of expected directory structure.')
     .option('ignore-files', 'the files you want to ignore. split with comma.')
     .option('ignore-directories', 'the directories you want to ignore. split with comma.')
-    .option('read-path', 'the path that you assign to read.');
+    .option('read-path', 'the path that you assign to read.')
+    .option('render-layout', 'render diff result with \'vertical\' or \'horizontal\'');
 
   return arg.parse(rawArgs);
 }
@@ -15,19 +15,13 @@ function parseArgumentsIntoOptions(rawArgs) {
 export function cli(args) {
   let options = parseArgumentsIntoOptions(args);
   if (options.braceExpansion) {
-    let output = "";
-    avfs().then((resolve) => {
-      output = `expect/match/unmatch: ${resolve.expectCount}/${resolve.matchCount}/${resolve.unmatchCount}`;
-      console.info(chalk.green.bgYellow.bold(output));
+    avfs.setRenderLayout(renderLayout).diff().then((resolve) => {
+      console.info(resolve.diff);
     }, (reject) => {
-      if (reject.type) {
-        console.error(chalk.red.bgYellow.bold(output));
-        console.error(`error message: ${reject.message}`);
+      if (reject.type && reject.message) {
+        console.setFailed(`type: ${reject.type} error message: ${reject.message}`);
       }
-      else {
-        output = `expect/match/unmatch: ${reject.expectCount}/${reject.matchCount}/${reject.unmatchCount}`;
-        console.info(chalk.red.bgYellow.bold(output));
-      }
+      console.error(reject.diff);
     });
   }
   else {

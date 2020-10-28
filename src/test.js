@@ -1,17 +1,10 @@
-const avfs = require("./avfs.js");
-const chalk = require('chalk');
+const { avfs } = require("./avfs.js");
 
-let output = "";
-avfs().then((resolve) => {
-  output = `expect/match/unmatch: ${resolve.expectCount}/${resolve.matchCount}/${resolve.unmatchCount}`;
-  console.info(chalk.green.bgYellow.bold(output));
+avfs.setRenderLayout("vertical").diff().then((resolve) => {
+  console.info(resolve.diff);
 }, (reject) => {
-  if (reject.type) {
-    console.error(chalk.red.bgYellow.bold(output));
-    console.error(`error message: ${reject.message}`);
+  if (reject.type && reject.message) {
+    console.setFailed(`type: ${reject.type} error message: ${reject.message}`);
   }
-  else {
-    output = `expect/match/unmatch: ${reject.expectCount}/${reject.matchCount}/${reject.unmatchCount}`;
-    console.info(chalk.red.bgYellow.bold(output));
-  }
+  console.error(reject.diff);
 });

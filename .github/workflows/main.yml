@@ -5,9 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     name: run sample test locally
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - run: npm ci
       - name: validate-fs
         uses: ./
         id: validation
@@ -15,4 +12,21 @@ jobs:
           brace-expansion: "{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}"
           ignore-files: "README.md"
           ignore-directories: ".git"
-          read-path: "./sample_folder"
+          read-path: "sample_folder"
+          render-layout: "vertical"
+  test-github-actions-remotely:
+    runs-on: ubuntu-latest
+    name: run sample test remotely
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - run: npm ci
+      - name: validate-fs
+        uses: anyone-developer/anyone-validate-fs@latest
+        id: validation
+        with:
+          brace-expansion: "{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}"
+          ignore-files: "README.md"
+          ignore-directories: ".git"
+          read-path: "sample_folder"
+          render-layout: "vertical"

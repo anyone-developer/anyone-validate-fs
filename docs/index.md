@@ -26,6 +26,10 @@ the directories you want to ignore. split with comma.
 
 the path that you assign to read.
 
+### `render-layout`
+
+render diff result with \'vertical\' or \'horizontal\'
+
 ## Outputs
 
 ### `output`
@@ -40,7 +44,8 @@ with:
   brace-expansion: '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}'
   ignore-files: 'README.md'
   ignore-directories: '.git'
-  read-path: './'
+  read-path: 'sample_folder'
+  render-layout: 'horizontal'
 ```
 
 ## Donation

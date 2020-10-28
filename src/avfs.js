@@ -4,23 +4,10 @@ const path = require('path');
 const rrdir = require('rrdir');
 const chalk = require('chalk');
 const treeify = require('treeify');
-let Table = require('tty-table');
+const Table = require('tty-table');
+const rdiff = require('recursive-diff');
 
-let expectCount = 0;
-let matchCount = 0;
-let unmatchCount = 0;
-let logger = global.logger ? global.logger : console;
-
-function oneOfItemEndsWithPath(path, array) {
-  for (const e of array) {
-    if (e == path || path.endsWith(e)) {
-      logger.info(chalk.green("matching FROM: " + path + " TO: " + e));
-      array.push(path);
-      return true;
-    }
-  }
-  return false;
-}
+this.logger = global.logger ? global.logger : console;
 
 function getNextPath(path) {
   return path.split('\\').slice(1).join('\\');
@@ -55,15 +42,15 @@ function getTreeNode(array) {
   return object;
 }
 
-const avfs = function (
+module.exports.diff = function (
   readPath = 'sample_folder',
-  expansion = '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},x/p/a/b/c/{a.qa.config,a.prd.config}}',
+  expansion = '{{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config},{x,y}/p/a/b/c/{a.qa.config,a.prd.config}}',
   ignoreFiles = "README.md",
   ignoreDirectories = ".git") {
   return new Promise((resolve, reject) => {
     try {
       if (!expansion) {
-        logger.error(chalk.red("param 'brace-expansion' is required"));
+        this.logger.error(chalk.red("param 'brace-expansion' is required"));
         reject({
           type: "insufficient param",
           message: "param 'brace-expansion' is required"
@@ -84,11 +71,11 @@ const avfs = function (
       const expectTreeHeader = chalk.blueBright.bgYellowBright.bold("[Expect]");
       const expectTreeSubHeader = chalk.blueBright.bold("brace-expansion");
       const expectTreeContent = chalk.blue(treeify.asTree(expectTree));
-      // logger.info(expectTreeHeader);
-      // logger.info(expectTreeContent);
+      // this.logger.info(expectTreeHeader);
+      // this.logger.info(expectTreeContent);
 
       if (!fs.existsSync(readPath)) {
-        logger.error(chalk.red("the path: " + readPath + " was not existed"));
+        this.logger.error(chalk.red("the path: " + readPath + " was not existed"));
         reject({
           type: "insufficient param",
           message: "the path: " + readPath + " was not existed"
@@ -115,17 +102,60 @@ const avfs = function (
       const actualTreeSubHeader = chalk.greenBright.bold("under: " + readPath);
       const actualTreeContent = chalk.green(treeify.asTree(actualTree));
 
-      const out = Table([
+      this.delta = rdiff.getDiff(actualTree, expectTree);
+      function* diffRows(obj) {
+        for (let prop of Object.keys(obj)) {
+          switch (prop) {
+            case "op":
+              yield obj[prop];
+              break;
+            case "path":
+              yield obj[prop].join("->");
+              break;
+            case "val":
+              yield chalk.magentaBright(treeify.asTree(obj[prop]));
+              break;
+          }
+        }
+      }
+
+      const tableDelta = this.delta.map(i => {
+        const keys = Object.keys(i);
+        if (!keys.includes("val"))
+          i.val = "";
+        return Array.from(diffRows(i));
+      });
+
+      const diffTreeHeader = chalk.redBright.bgYellowBright.bold("[Diff]");
+      const diffTreeSubHeader = chalk.redBright.bold("[Expect] diff with [Actual]");
+      const diffTreeContent = Table([
         {
-          value: expectTreeHeader
+          value: "[Action]"
         },
         {
-          value: actualTreeHeader
-        }], 
+          value: "[Path]"
+        },
+        {
+          value: "[Structure]"
+        }
+      ],
+        tableDelta,
+        {
+          borderStyle: "dashed",
+          borderColor: "gray",
+          headerAlign: "center",
+          align: "left",
+          color: "red"
+        }).render();
+
+      if (this.layout == "vertical") {
+        let out = Table([
+          { value: actualTreeHeader }
+        ],
         [
-          [expectTreeSubHeader, actualTreeSubHeader],
-          [expectTreeContent, actualTreeContent]
-        ], 
+          [actualTreeSubHeader],
+          [actualTreeContent]
+        ],
         {
           borderStyle: "solid",
           borderColor: "gray",
@@ -134,31 +164,86 @@ const avfs = function (
           color: "white",
           width: "100%"
         }).render();
-      console.log(out);
-      
+        this.logger.log(out);
+
+        out = Table([
+          { value: expectTreeHeader }
+        ],
+        [
+          [expectTreeSubHeader],
+          [expectTreeContent]
+        ],
+        {
+          borderStyle: "solid",
+          borderColor: "gray",
+          headerAlign: "center",
+          align: "left",
+          color: "white",
+          width: "100%"
+        }).render();
+        this.logger.log(out);
+
+        out = Table([
+          { value: diffTreeHeader }
+        ],
+        [
+          [diffTreeSubHeader],
+          [diffTreeContent]
+        ],
+        {
+          borderStyle: "solid",
+          borderColor: "gray",
+          headerAlign: "center",
+          align: "left",
+          color: "white",
+          width: "100%"
+        }).render();
+        this.logger.log(out);
+      }
+      else {
+        const out = Table([
+          { value: actualTreeHeader },
+          { value: expectTreeHeader },
+          { value: diffTreeHeader }],
+          [
+            [actualTreeSubHeader, expectTreeSubHeader, diffTreeSubHeader],
+            [actualTreeContent, expectTreeContent, diffTreeContent],
+          ],
+          {
+            borderStyle: "solid",
+            borderColor: "gray",
+            headerAlign: "center",
+            align: "left",
+            color: "white",
+            width: "100%"
+          }).render();
+
+          this.logger.log(out);
+      }
     } catch (error) {
-      logger.error(chalk.red(error.message));
+      this.logger.error(chalk.red(error.message));
       reject({
         type: error,
         message: error.message
       });
     } finally {
-      if (unmatchCount > expectCount || unmatchCount > 0) {
+      if (this.delta) {
         reject({
-          expectCount: expectCount,
-          matchCount: matchCount,
-          unmatchCount: unmatchCount
+          diff: JSON.stringify(this.delta)
         });
       }
       else {
         resolve({
-          expectCount: expectCount,
-          matchCount: matchCount,
-          unmatchCount: unmatchCount
+          diff: JSON.stringify(this.delta)
         });
       }
     }
   });
 }
 
-module.exports = avfs;
+module.exports.setRenderLayout = function (layout) {
+  this.layout = layout;
+  return module.exports;
+}
+
+module.exports.avfs = module.exports;
