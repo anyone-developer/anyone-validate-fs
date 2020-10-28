@@ -6,11 +6,9 @@ avfs.setRenderLayout("vertical").diff(
   "README.md",
   ".git"
 ).then((resolve) => {
-  this.exitCode = 0;
   console.info(resolve.diff);
   return resolve.diff;
 }, (reject) => {
-  this.exitCode = 1;
   if (reject.type && reject.message) {
     console.error(`type: ${reject.type} error message: ${reject.message}`);
   }
@@ -18,4 +16,3 @@ avfs.setRenderLayout("vertical").diff(
   return reject.diff;
 });
 
-return this.exitCode;

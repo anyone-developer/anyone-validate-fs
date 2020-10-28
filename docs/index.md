@@ -1,6 +1,7 @@
 # anyone-validate-fs
 
-![nightly build status](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
+![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
+![unit-test](https://github.com/anyone-developer/anyone-validate-fs/workflows/unit-test/badge.svg)
 
 This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
 
