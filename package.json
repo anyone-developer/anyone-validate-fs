@@ -1,13 +1,12 @@
 {
   "name": "anyone-validate-fs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "scripts": {
     "test": "node src/test.js",
     "link": "npm link --force",
-    "cli": "anyone-validate-fs",
-    "release": "release-it"
+    "cli": "anyone-validate-fs"
   },
   "bin": {
     "anyone-validate-fs": "bin/anyone-validate-fs"
@@ -31,7 +30,6 @@
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "args": "^5.0.1",
-    "as-table": "^1.0.55",
     "braces": "^3.0.2",
     "chalk": "^4.1.0",
     "esm": "^3.2.25",

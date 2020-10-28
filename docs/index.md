@@ -1,6 +1,7 @@
 # anyone-validate-fs
 
 ![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
+![Node.js Package](https://github.com/anyone-developer/anyone-validate-fs/workflows/Node.js%20Package/badge.svg)
 
 This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
 
@@ -55,4 +56,5 @@ PalPal: https://paypal.me/nzhang4
 <img src="https://raw.githubusercontent.com/anyone-developer/anyone-validate-fs/main/misc/alipay.JPG" width="500">
 
 <img src="https://raw.githubusercontent.com/anyone-developer/anyone-validate-fs/main/misc/webchat_pay.JPG" width="500">
+
 
