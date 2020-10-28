@@ -11,19 +11,19 @@ this.logger = global.logger ? global.logger : console;
 
 function getNextPath(path) {
   console.log("getNextPath:" + path);
-  return path.split('\\').slice(1).join('\\');
+  return path.split(path.sep).slice(1).join(path.sep);
 }
 
 function getNextLevelPath(path) {
-  let paths = path.split('\\');
+  let paths = path.split(path.sep);
   if (paths.length > 1) {
-    return paths.slice(1).join('\\');
+    return paths.slice(1).join(path.sep);
   }
   return null;
 }
 
 function getTopLevelPath(path) {
-  return path.split('\\')[0];
+  return path.split(path.sep)[0];
 }
 
 function getTreeNode(array) {
@@ -56,8 +56,8 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
       }
 
       readPath = path.normalize(readPath);
-      const ignoreFilesArray = ignoreFiles.split(',').map(i => path.normalize(readPath + "\\" + i));
-      const ignoreDirectoriesArray = ignoreDirectories.split(',').map(i => path.normalize(readPath + "\\" + i));
+      const ignoreFilesArray = ignoreFiles.split(',').map(i => path.normalize(readPath + path.sep + i));
+      const ignoreDirectoriesArray = ignoreDirectories.split(',').map(i => path.normalize(readPath + path.sep + i));
 
       const expectStructure = braces(expansion, { expand: true }).map(i => {
         return path.normalize(i);
@@ -82,6 +82,8 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
         strict: true
       });
+      console.log("path.sep: " + path.sep);
+
       console.log("before--->");
       console.log(actualPath);
       actualPath = actualPath.map(i => {
