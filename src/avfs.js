@@ -10,7 +10,6 @@ const rdiff = require('recursive-diff');
 this.logger = global.logger ? global.logger : console;
 
 function getNextPath(p) {
-  console.log("getNextPath:" + p);
   return p.split(path.sep).slice(1).join(path.sep);
 }
 
@@ -82,10 +81,6 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
         strict: true
       });
-      console.log("path.sep: " + path.sep);
-
-      console.log("before--->");
-      console.log(actualPath);
       actualPath = actualPath.map(i => {
         return {
           path: getNextPath(path.normalize(i.path)),
@@ -93,17 +88,8 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
           symlink: i.symlink
         }
       });
-      console.log("step1--->");
-      console.log(actualPath);
-
       actualPath = actualPath.filter(i => !i.directory);
-
-      console.log("step2--->");
-      console.log(actualPath);
-
       actualPath = [...actualPath.map(i => i.path)];
-      console.log("after--->");
-      console.log(actualPath);
       const actualTree = getTreeNode(actualPath);
       const actualTreeHeader = chalk.greenBright.bgYellowBright.bold("[Actual]");
       const actualTreeSubHeader = chalk.greenBright.bold("under: " + readPath);
