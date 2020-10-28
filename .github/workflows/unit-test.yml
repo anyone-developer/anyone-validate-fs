@@ -9,11 +9,3 @@ jobs:
         uses: actions/checkout@v2
       - run: npm ci
       - run: npm run test
-  action-unit-test:
-    runs-on: ubuntu-latest
-    name: run action unit test
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - run: npm ci
-      - run: npm run test-action

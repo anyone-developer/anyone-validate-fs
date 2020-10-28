@@ -8,6 +8,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - run: npm ci
+      - run: pwd
+      - run: ls -al
       - name: validate-fs
         uses: ./
         id: validation
@@ -21,9 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     name: run sample test remotely
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - run: npm ci
       - name: validate-fs
         uses: anyone-developer/anyone-validate-fs@1.0
         id: validation
