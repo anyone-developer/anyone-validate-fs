@@ -228,7 +228,7 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
       }
       else {
         resolve({
-          diff: JSON.stringify(this.delta)
+          diff: this.data
         });
       }
     }

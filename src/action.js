@@ -3,15 +3,17 @@ const github = require('@actions/github');
 const { avfs } = require("./avfs.js");
 
 global.logger = core;
-avfs.setRenderLayout("vertical").diff(
+avfs.setRenderLayout(core.getInput('render-layout')).diff(
   core.getInput('read-path'),
   core.getInput('brace-expansion'),
   core.getInput('ignore-files'),
   core.getInput('ignore-directories')
 ).then((resolve) => {
+  this.exitCode = core.ExitCode.Success;
   global.logger.info(resolve.diff);
   return resolve.diff;
 }, (reject) => {
+  this.exitCode = core.ExitCode.Failure;
   if (reject.type && reject.message) {
     global.logger.setFailed(`type: ${reject.type} error message: ${reject.message}`);
   }
@@ -21,4 +23,4 @@ avfs.setRenderLayout("vertical").diff(
   global.logger.setOutput(output);
 });
 
-module.exports = avfs;
+return this.exitCode;
