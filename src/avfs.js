@@ -10,6 +10,7 @@ const rdiff = require('recursive-diff');
 this.logger = global.logger ? global.logger : console;
 
 function getNextPath(path) {
+  console.log("getNextPath:" + path);
   return path.split('\\').slice(1).join('\\');
 }
 
@@ -97,7 +98,7 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
 
       console.log("step2--->");
       console.log(actualPath);
-      
+
       actualPath = [...actualPath.map(i => i.path)];
       console.log("after--->");
       console.log(actualPath);
