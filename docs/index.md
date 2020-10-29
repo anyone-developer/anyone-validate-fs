@@ -20,9 +20,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/anyone-developer/anyone-validate-fs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/anyone-developer/anyone-validate-fs/context:javascript)
 [![DeepScan grade](https://deepscan.io/api/teams/11532/projects/14440/branches/269275/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11532&pid=14440&bid=269275)
 
-
-
-This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
+This github action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
 
 *If you like my module, please buy me a coffee.*
 
@@ -56,9 +54,9 @@ render diff result with \'vertical\' or \'horizontal\'
 
 output of execution.
 
-## Other Way to use
+## Other way usage
 
-### `npm package`
+### `From NPM for programmatic use`
 
 - create a 'demo' folder
 - **npm init** to create your nodejs package
@@ -92,7 +90,8 @@ avfs.setRenderLayout("horizontal").diff(
 
 <img src="https://raw.githubusercontent.com/anyone-developer/anyone-validate-fs/main/misc/module.png" width="500">
 
-### `Terminal`
+
+### `From NPM for using as a command line app`
 
 - **npm install -g anyone-validate-fs** to install gobally
 - **anyone-validate-fs -r './sample_folder' -b '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}' -I ".git" -i "README.md"** to use your bash to execute it.
