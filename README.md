@@ -1,15 +1,19 @@
 # anyone-validate-fs
 
 [![dependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs)
+[![devDependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/dev-status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs?type=dev)
 ![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
 ![Node.js Package](https://github.com/anyone-developer/anyone-validate-fs/workflows/Node.js%20Package/badge.svg)
 [![XO code style](https://badgen.net/xo/status/chalk)](https://github.com/xojs/xo)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git.svg?type=small)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git?ref=badge_small)
 
 This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
 
 *If you like my module, please buy me a coffee.*
 
 *More and more tiny and useful github actions modules are on the way. Please donate to me. I accept part time job contract. if you need, please contact me: zhang_nan_163@163.com*
+
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git.svg?type=large)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git?ref=badge_large)
 
 ## Inputs
 
