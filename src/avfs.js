@@ -68,7 +68,7 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
     try {
       if (!expansion) {
         this.logger.error(chalk.red('param \'brace-expansion\' is required'));
-        reject(new Error('insufficient param', 'param \'brace-expansion\' is required'));
+        reject(new Error('param \'brace-expansion\' is required'));
         return;
       }
 
@@ -88,7 +88,7 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
 
       if (!fs.existsSync(readPath)) {
         this.logger.error(chalk.red('the path: ' + readPath + ' was not existed'));
-        reject(new Error('insufficient param', 'the path: ' + readPath + ' was not existed'));
+        reject(new Error('the path: ' + readPath + ' was not existed'));
         return;
       }
 
@@ -216,10 +216,10 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
       }
     } catch (error) {
       this.logger.error(chalk.red(error.message));
-      reject(new Error(error, error.message));
+      reject(error);
     } finally {
       if (this.delta && this.delta.length > 0) {
-        reject(new Error('[fail]', JSON.stringify(this.delta)));
+        reject(new Error(JSON.stringify(this.delta)));
       } else {
         resolve({
           diff: chalk.greenBright.bgYellowBright('[success] file structures are all matched!')

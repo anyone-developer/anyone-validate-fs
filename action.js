@@ -14,7 +14,7 @@ avfs.setRenderLayout(core.getInput('render-layout')).diff(
 }, error => {
   this.exitCode = core.ExitCode.Failure;
   if (error.name && error.message) {
-    global.logger.setFailed(`name: ${error.name} error message: ${error.message}`);
+    global.logger.setFailed(`error message: ${error.message}`);
   }
 
   return error.message;

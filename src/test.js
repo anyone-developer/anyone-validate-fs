@@ -10,7 +10,7 @@ avfs.setRenderLayout('vertical').diff(
   return resolve.diff;
 }, error => {
   if (error.name && error.message) {
-    console.error(`name: ${error.name} error message: ${error.message}`);
+    console.error(`error message: ${error.message}`);
   }
 
   return error.message;

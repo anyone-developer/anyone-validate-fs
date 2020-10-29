@@ -24,7 +24,7 @@ export function cli(args) {
       console.info(resolve.diff);
     }, error => {
       if (error.name && error.message) {
-        console.setFailed(`name: ${error.name} error message: ${error.message}`);
+        console.setFailed(`error message: ${error.message}`);
       }
     });
   } else {
