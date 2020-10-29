@@ -1,10 +1,20 @@
 # anyone-validate-fs
 
-[![dependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs)
-[![devDependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/dev-status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs?type=dev)
 ![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
 ![Node.js Package](https://github.com/anyone-developer/anyone-validate-fs/workflows/Node.js%20Package/badge.svg)
+[![dependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs)
+[![devDependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/dev-status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs?type=dev)
+
+![version](https://badgen.net/npm/v/anyone-validate-fs)
+![bundlephobia](https://badgen.net/bundlephobia/min/anyone-validate-fs)
+![bundlephobia](https://badgen.net/bundlephobia/minzip/anyone-validate-fs)
+![license](https://badgen.net/npm/license/anyone-validate-fs)
+
 [![XO code style](https://badgen.net/xo/status/chalk)](https://github.com/xojs/xo)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/anyone-developer/anyone-validate-fs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/anyone-developer/anyone-validate-fs/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/anyone-developer/anyone-validate-fs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/anyone-developer/anyone-validate-fs/context:javascript)
+[![DeepScan grade](https://deepscan.io/api/teams/11532/projects/14440/branches/269275/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11532&pid=14440&bid=269275)
+
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git.svg?type=small)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git?ref=badge_small)
 
 This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
