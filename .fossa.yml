@@ -5,7 +5,7 @@ version: 2
 cli:
   server: https://app.fossa.com
   fetcher: custom
-  project: git@github.com:nzhang4-sh/anyone-validate-directory.git
+  project: git@github.com:anyone-developer/anyone-validate-fs.git
 analyze:
   modules:
   - name: .
