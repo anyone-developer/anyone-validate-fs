@@ -13,8 +13,6 @@ This action help you to validate file structure as you expected. The validate ru
 
 *More and more tiny and useful github actions modules are on the way. Please donate to me. I accept part time job contract. if you need, please contact me: zhang_nan_163@163.com*
 
-[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git.svg?type=large)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git?ref=badge_large)
-
 ## Inputs
 
 ### `brace-expansion`
@@ -96,6 +94,10 @@ with:
   read-path: 'sample_folder'
   render-layout: 'horizontal'
 ```
+
+## Fossa Report
+
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git.svg?type=large)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Anzhang4-sh%2Fanyone-validate-directory.git?ref=badge_large)
 
 ## Donation
 
