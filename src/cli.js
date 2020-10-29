@@ -1,5 +1,5 @@
 import arg from 'args';
-import { avfs } from "./avfs";
+import {avfs} from './avfs';
 
 function parseArgumentsIntoOptions(rawArgs) {
   arg
@@ -13,23 +13,21 @@ function parseArgumentsIntoOptions(rawArgs) {
 }
 
 export function cli(args) {
-  let options = parseArgumentsIntoOptions(args);
+  const options = parseArgumentsIntoOptions(args);
   if (options.braceExpansion) {
     avfs.setRenderLayout(options.renderLayout).diff(
       options.readPath,
       options.braceExpansion,
       options.ignoreFiles,
       options.ignoreDirectories
-    ).then((resolve) => {
+    ).then(resolve => {
       console.info(resolve.diff);
-    }, (reject) => {
-      if (reject.type && reject.message) {
-        console.setFailed(`type: ${reject.type} error message: ${reject.message}`);
+    }, error => {
+      if (error.name && error.message) {
+        console.setFailed(`name: ${error.name} error message: ${error.message}`);
       }
-      console.error(reject.diff);
     });
-  }
-  else {
+  } else {
     arg.showHelp();
   }
 }

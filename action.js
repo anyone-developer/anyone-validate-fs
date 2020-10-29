@@ -1,6 +1,5 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
-const { avfs } = require('./src/avfs.js');
+const {avfs} = require('./src/avfs.js');
 
 global.logger = core;
 avfs.setRenderLayout(core.getInput('render-layout')).diff(
@@ -8,18 +7,18 @@ avfs.setRenderLayout(core.getInput('render-layout')).diff(
   core.getInput('brace-expansion'),
   core.getInput('ignore-files'),
   core.getInput('ignore-directories')
-).then((resolve) => {
+).then(resolve => {
   this.exitCode = core.ExitCode.Success;
   global.logger.info(resolve.diff);
   return resolve.diff;
-}, (reject) => {
+}, error => {
   this.exitCode = core.ExitCode.Failure;
-  if (reject.type && reject.message) {
-    global.logger.setFailed(`type: ${reject.type} error message: ${reject.message}`);
+  if (error.name && error.message) {
+    global.logger.setFailed(`name: ${error.name} error message: ${error.message}`);
   }
-  global.logger.error(reject.diff);
-  return reject.diff;
-}).then((output) => {
+
+  return error.message;
+}).then(output => {
   global.logger.setOutput(output);
   return this.exitCode;
 });

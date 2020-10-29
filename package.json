@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node src/test.js",
     "link": "npm link --force",
-    "cli": "anyone-validate-fs"
+    "cli": "anyone-validate-fs",
+    "xo": "xo",
+    "xo-fix": "xo --fix"
   },
   "bin": {
     "anyone-validate-fs": "bin/anyone-validate-fs"
