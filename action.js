@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { avfs } = require("./src/avfs.js");
+const { avfs } = require('./src/avfs.js');
 
 global.logger = core;
 avfs.setRenderLayout(core.getInput('render-layout')).diff(
@@ -21,6 +21,5 @@ avfs.setRenderLayout(core.getInput('render-layout')).diff(
   return reject.diff;
 }).then((output) => {
   global.logger.setOutput(output);
+  return this.exitCode;
 });
-
-return this.exitCode;

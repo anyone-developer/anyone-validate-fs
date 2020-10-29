@@ -14,10 +14,11 @@ function getNextPath(p) {
 }
 
 function getNextLevelPath(p) {
-  let paths = p.split(path.sep);
+  const paths = p.split(path.sep);
   if (paths.length > 1) {
     return paths.slice(1).join(path.sep);
   }
+
   return null;
 }
 
@@ -26,16 +27,17 @@ function getTopLevelPath(p) {
 }
 
 function getTreeNode(array) {
-  let object = {};
+  const object = {};
   for (const a of array) {
     const top = getTopLevelPath(a);
     const next = getNextLevelPath(a);
     if (!next) {
-      object[top] = "file";
+      object[top] = 'file';
       continue;
     }
+
     const subArray = array.filter(i => i.startsWith(top)).map(i => getNextLevelPath(i));
-    if (!object.hasOwnProperty(top)) {
+    if (!Object.prototype.hasOwnProperty.call(object, top)) {
       object[top] = { ...getTreeNode(subArray) };
     }
   }

@@ -40,5 +40,8 @@
   },
   "directories": {
     "doc": "docs"
+  },
+  "devDependencies": {
+    "xo": "^0.34.1"
   }
 }

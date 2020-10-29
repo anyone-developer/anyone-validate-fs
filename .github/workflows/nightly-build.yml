@@ -8,6 +8,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - run: npm ci
+      - name: xo-action
+        uses: stoe/xo-action@v1.0.1
       - name: validate-fs
         uses: ./
         id: validation
