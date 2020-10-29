@@ -1,1 +1,0 @@
-FOSSA_API_KEY=$1 fossa analyze
