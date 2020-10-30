@@ -10,8 +10,8 @@
 [![devDependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/dev-status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs?type=dev)
 
 ![version](https://badgen.net/npm/v/anyone-validate-fs)
-![bundlephobia](https://badgen.net/bundlephobia/min/anyone-validate-fs)
-![bundlephobia](https://badgen.net/bundlephobia/minzip/anyone-validate-fs)
+![packagephobia](https://badgen.net/packagephobia/publish/anyone-validate-fs)
+![packagephobia](https://badgen.net/packagephobia/install/anyone-validate-fs)
 ![license](https://badgen.net/npm/license/anyone-validate-fs)
 
 [![Build Status](https://travis-ci.org/anyone-developer/anyone-validate-fs.svg?branch=main)](https://travis-ci.org/anyone-developer/anyone-validate-fs)
@@ -100,7 +100,7 @@ avfs.setRenderLayout("horizontal").diff(
 ## Example usage
 
 ```yml
-uses: nzhang4-sh/anyone-validate-fs@v1.0
+uses: anyone-developer/anyone-validate-fs@v1.0
 with:
   brace-expansion: '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}'
   ignore-files: 'README.md'

@@ -10,8 +10,8 @@
 [![devDependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/dev-status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs?type=dev)
 
 ![version](https://badgen.net/npm/v/anyone-validate-fs)
-![bundlephobia](https://badgen.net/bundlephobia/min/anyone-validate-fs)
-![bundlephobia](https://badgen.net/bundlephobia/minzip/anyone-validate-fs)
+![packagephobia](https://badgen.net/packagephobia/publish/anyone-validate-fs)
+![packagephobia](https://badgen.net/packagephobia/install/anyone-validate-fs)
 ![license](https://badgen.net/npm/license/anyone-validate-fs)
 
 [![Build Status](https://travis-ci.org/anyone-developer/anyone-validate-fs.svg?branch=main)](https://travis-ci.org/anyone-developer/anyone-validate-fs)
@@ -64,24 +64,26 @@ output of execution.
 - **npm install anyone-validate-fs** to install module
 - create 'index.js' and copy code below:
 
+<iframe height="400px" width="100%" src="https://repl.it/@EdwardRoshan/anyone-validate-fs-demo?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
 ```javascript
 
-const { avfs } = require('anyone-validate-fs');
+const {avfs} = require('anyone-validate-fs');
 
-avfs.setRenderLayout("horizontal").diff(
-    './sample_folder',
-    '{x/p,y/f,{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}}',
-    "README.md",
-    ".git"
-).then((resolve) => {
-    console.info(resolve.diff);
-    return resolve.diff;
-}, (reject) => {
-    if (reject.type && reject.message) {
-        console.error(`type: ${reject.type} error message: ${reject.message}`);
-    }
-    console.error(reject.diff);
-    return reject.diff;
+avfs.setRenderLayout('horizontal').diff(
+  './sample_folder',
+  '{x/p,y/f,{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}}',
+  'README.md',
+  '.git'
+).then(resolve => {
+  console.info(resolve.diff);
+  return resolve.diff;
+}, error => {
+  if (error.name && error.message) {
+    console.error(`error message: ${error.message}`);
+  }
+
+  return error.message;
 });
 
 ```
@@ -100,7 +102,7 @@ avfs.setRenderLayout("horizontal").diff(
 ## Example usage
 
 ```yml
-uses: nzhang4-sh/anyone-validate-fs@v1.0
+uses: anyone-developer/anyone-validate-fs@v1.0
 with:
   brace-expansion: '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}'
   ignore-files: 'README.md'
