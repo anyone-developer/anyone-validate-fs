@@ -8,7 +8,11 @@
     "link": "npm link --force",
     "cli": "anyone-validate-fs",
     "xo": "xo",
-    "xo-fix": "xo --fix"
+    "xo-fix": "xo --fix",
+    "build": "npm run build-win && npm run build-macos && npm run build-linux",
+    "build-win": "pkg bin/anyone-validate-fs.js -t node12-win-x64 -o dist/anyone-validate-fs-win",
+    "build-macos": "pkg bin/anyone-validate-fs.js -t node12-macos-x64 -o dist/anyone-validate-fs-macos",
+    "build-linux": "pkg bin/anyone-validate-fs.js -t node12-linux-x64 -o dist/anyone-validate-fs-linux"
   },
   "bin": {
     "anyone-validate-fs": "bin/anyone-validate-fs"
@@ -29,12 +33,9 @@
   },
   "homepage": "https://github.com/anyone-developer/anyone-validate-fs#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
     "args": "^5.0.1",
     "braces": "^3.0.2",
     "chalk": "^4.1.0",
-    "esm": "^3.2.25",
     "recursive-diff": "^1.0.8",
     "rrdir": "^8.2.0",
     "treeify": "^1.1.0",
@@ -48,6 +49,7 @@
     "doc": "docs"
   },
   "devDependencies": {
+    "pkg": "^4.4.9",
     "xo": "^0.34.1"
   }
 }

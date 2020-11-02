@@ -97,8 +97,10 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
         strict: true
       });
       actualPath = actualPath.map(i => {
+        const p = path.normalize(i.path).slice(readPath.length);
+
         return {
-          path: getNextPath(path.normalize(i.path)),
+          path: getNextPath(path.normalize(p)),
           directory: i.directory,
           symlink: i.symlink
         };

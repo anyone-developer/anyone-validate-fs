@@ -1,5 +1,5 @@
-import arg from 'args';
-import {avfs} from './avfs';
+const arg = require('args');
+const {avfs} = require('./avfs');
 
 function parseArgumentsIntoOptions(rawArgs) {
   arg
@@ -12,7 +12,7 @@ function parseArgumentsIntoOptions(rawArgs) {
   return arg.parse(rawArgs);
 }
 
-export function cli(args) {
+module.exports.cli = function (args) {
   const options = parseArgumentsIntoOptions(args);
   if (options.braceExpansion) {
     avfs.setRenderLayout(options.renderLayout).diff(
@@ -24,10 +24,10 @@ export function cli(args) {
       console.info(resolve.diff);
     }, error => {
       if (error.name && error.message) {
-        console.setFailed(`error message: ${error.message}`);
+        console.error(`error message: ${error.message}`);
       }
     });
   } else {
     arg.showHelp();
   }
-}
+};
