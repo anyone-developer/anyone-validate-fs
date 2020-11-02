@@ -64,8 +64,6 @@ output of execution.
 - **npm install anyone-validate-fs** to install module
 - create 'index.js' and copy code below:
 
-<iframe height="400px" width="100%" src="https://repl.it/@EdwardRoshan/anyone-validate-fs-demo?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-
 ```javascript
 
 const {avfs} = require('anyone-validate-fs');
@@ -87,6 +85,8 @@ avfs.setRenderLayout('horizontal').diff(
 });
 
 ```
+
+here is repl.it online editor: https://repl.it/@EdwardRoshan/anyone-validate-fs-demo
 
 - **node index.js** to run it
 
