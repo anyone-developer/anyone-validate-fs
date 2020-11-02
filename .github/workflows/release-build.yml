@@ -30,7 +30,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Windows artifact
-        id: upload-release-asset 
+        id: upload-windows-artifact 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +40,7 @@ jobs:
           asset_name: windows.zip
           asset_content_type: application/zip
       - name: Upload Macos artifact
-        id: upload-release-asset 
+        id: upload-macos-artifact 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
           asset_name: macos.zip
           asset_content_type: application/zip
       - name: Upload Linux artifact
-        id: upload-release-asset 
+        id: upload-linux-artifact 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
