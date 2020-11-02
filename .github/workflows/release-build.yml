@@ -59,3 +59,5 @@ jobs:
           asset_path: ./linux.zip
           asset_name: linux.zip
           asset_content_type: application/zip
+      - name: Upload Package to Chocolatey
+        run: choco apikey --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/ && choco push MyPackage.${{ github.run_number }}.nupkg --source https://push.chocolatey.org/

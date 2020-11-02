@@ -1,7 +1,6 @@
 # anyone-validate-fs
 
 ![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
-![action-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/action-build/badge.svg)
 ![Release Build](https://github.com/anyone-developer/anyone-validate-fs/workflows/Release%20Build/badge.svg)
 ![Node.js Package](https://github.com/anyone-developer/anyone-validate-fs/workflows/Node.js%20Package/badge.svg)
 ![License Scanning](https://github.com/anyone-developer/anyone-validate-fs/workflows/License%20Scanning/badge.svg)
