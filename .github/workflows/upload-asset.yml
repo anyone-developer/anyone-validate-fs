@@ -1,7 +1,7 @@
 on:
   push:
     tags:
-    - 'release-*'
+    - 'prerelease-*'
 
 name: Upload Release Asset
 
@@ -18,8 +18,9 @@ jobs:
           node-version: 12
       - run: npm ci
       - name: Build project
-        run: |
-          npm run build
+        run: npm run build
+      - name: Package artifact
+        run: zip -r release.zip dist
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -37,6 +38,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./anyone-validate-fs.zip
-          asset_name: anyone-validate-fs.zip
+          asset_path: ./release.zip
+          asset_name: release.zip
           asset_content_type: application/zip
