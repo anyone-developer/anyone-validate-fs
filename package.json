@@ -1,5 +1,5 @@
 {
-  "name": "anyone-validate-fs",
+  "name": "@anyone-developer/anyone-validate-fs",
   "version": "0.9.5",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
@@ -17,10 +17,7 @@
   "bin": {
     "anyone-validate-fs": "bin/anyone-validate-fs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anyone-developer/anyone-validate-fs.git"
-  },
+  "repository": "git://github.com/anyone-developer/anyone-validate-fs.git",
   "keywords": [
     "cli",
     "anyone-validate-fs",
