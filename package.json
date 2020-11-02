@@ -1,6 +1,6 @@
 {
   "name": "anyone-validate-fs",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "scripts": {
