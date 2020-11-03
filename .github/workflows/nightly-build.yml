@@ -4,9 +4,6 @@ on:
     branches:
       - main
     types: [opened, edited, ready_for_review, reopened, synchronize]
-  push:
-    branches:
-      - develop
 jobs:
   license-scanning:
     runs-on: ubuntu-latest
