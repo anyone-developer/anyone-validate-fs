@@ -5,7 +5,6 @@ on:
 name: release-build
 jobs:
   npm-test:
-    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +25,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm install --production
+      - run: npm ci
       - name: Build project
         run: npm run build
       - name: Package artifact
