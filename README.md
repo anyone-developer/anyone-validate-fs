@@ -2,6 +2,7 @@
 
 ![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
 ![release-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/release-build/badge.svg)
+![release-test](https://github.com/anyone-developer/anyone-validate-fs/workflows/release-test/badge.svg)
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git.svg?type=small)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git?ref=badge_small)
 [![DependaBot](https://badgen.net/github/dependabot/anyone-developer/anyone-validate-fs)](https://github.com/anyone-developer/anyone-validate-fs/network/updates)
 ![version](https://badgen.net/npm/v/@anyone-developer/anyone-validate-fs)
