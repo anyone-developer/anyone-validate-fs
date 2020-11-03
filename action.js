@@ -1,7 +1,11 @@
 const core = require('@actions/core');
-const {avfs} = require('./src/avfs.js');
-
 global.logger = core;
+const {avfs} = require('./src/avfs.js');
+const {execSync} = require('child_process');
+const log = execSync('npm install --production');
+
+global.logger.info(log.toString());
+
 avfs.setRenderLayout(core.getInput('render-layout')).diff(
   core.getInput('read-path'),
   core.getInput('brace-expansion'),
