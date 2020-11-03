@@ -1,7 +1,7 @@
 name: nightly-build
 on: 
-  - pull_request
-  - push
+  pull_request:
+    types: [opened, edited, ready_for_review, reopened, synchronize]
 jobs:
   license-scanning:
     runs-on: ubuntu-latest
