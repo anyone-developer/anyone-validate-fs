@@ -1,10 +1,7 @@
 const core = require('@actions/core');
-global.logger = core;
 const {avfs} = require('./src/avfs.js');
-const {execSync} = require('child_process');
-const log = execSync('npm install --production');
 
-global.logger.info(log.toString());
+global.logger = core;
 
 avfs.setRenderLayout(core.getInput('render-layout')).diff(
   core.getInput('read-path'),
