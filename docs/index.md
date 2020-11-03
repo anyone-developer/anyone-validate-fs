@@ -94,7 +94,7 @@ here is repl.it online editor: https://repl.it/@EdwardRoshan/anyone-validate-fs-
 ## Example usage
 
 ```yml
-uses: anyone-developer/anyone-validate-fs@v1.0
+uses: anyone-developer/anyone-validate-fs@main
 with:
   brace-expansion: '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}'
   ignore-files: 'README.md'

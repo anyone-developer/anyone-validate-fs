@@ -30,5 +30,5 @@ outputs:
     description: 'output of execution'
 runs:
   using: 'node12'
-  pre: ./prepare.js
-  main: './action.js'
+  pre: 'prepare.js'
+  main: 'action.js'
