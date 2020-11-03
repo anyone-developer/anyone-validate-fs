@@ -1,0 +1,17 @@
+name: release-test
+on:
+  schedule:
+    - cron:  '* */1 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: validate file structure
+        uses: anyone-developer/anyone-validate-fs@master
+        with:
+          brace-expansion: '{SalesUtils.Services.AutoHold/{aum001,aum002,aut001,aut002},SalesUtils.Services.ScheduledTasks/{crl001,crl002},SalesUtils.Services.SyncCenter/{syn001,syn002},SalesUtils.Services.SyncNode/{sys001,sys002,sys003,sys004,sys005,sys006,sys007,sys008,sys009},SalesUtils.Web.Admin,SalesUtils.Web.Public,SalesUtils.Web,SalesUtils.WebAPI,TicketUtils.WebAPI,eTicketDownload}/{Web.Gcp.Prod.config,Web.Gcp.QA.config}'
+          ignore-files: 'README.md'
+          ignore-directories: ''
+          read-path: './'
+          render-layout: 'vertical'

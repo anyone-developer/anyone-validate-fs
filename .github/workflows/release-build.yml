@@ -26,14 +26,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
+      - run: npm install --production
       - name: Build project
         run: npm run build
       - name: Package artifact
         run: |
-          zip windows.zip dist/anyone-validate-fs-win.exe
-          zip macos.zip dist/anyone-validate-fs-macos
-          zip linux.zip dist/anyone-validate-fs-linux
+          mv dist/anyone-validate-fs-win.exe anyone-validate-fs-win.exe && zip windows.zip anyone-validate-fs-win.exe
+          mv dist/anyone-validate-fs-macos anyone-validate-fs-macos && zip macos.zip anyone-validate-fs-macos
+          mv dist/anyone-validate-fs-linux anyone-validate-fs-linux && zip linux.zip anyone-validate-fs-linux
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
