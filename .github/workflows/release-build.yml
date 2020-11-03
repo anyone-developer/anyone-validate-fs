@@ -1,10 +1,20 @@
 on:
-  push:
-    tags:
-    - 'build-*'
+  release:
+    types: [published]
 name: Release Build
 jobs:
-  build:
+  npm-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+
+  build-release:
+    needs: npm-test
     name: Release Build
     runs-on: ubuntu-latest
     steps:
@@ -18,24 +28,43 @@ jobs:
       - name: Build project
         run: npm run build
       - name: Package artifact
-        run: zip windows.zip dist/anyone-validate-fs-win.exe && zip macos.zip dist/anyone-validate-fs-macos && zip linux.zip dist/anyone-validate-fs-linux
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          zip windows.zip dist/anyone-validate-fs-win.exe
+          zip macos.zip dist/anyone-validate-fs-macos
+          zip linux.zip dist/anyone-validate-fs-linux
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     draft: false
+      #     prerelease: false
+      - name: Get Latest Release
+        uses: octokit/request-action@v2.x
+        id: get_latest_release
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+            route: GET /repos/:repository/releases/latest
+            repository: ${{ github.repository }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Upload Url
+        id: get_upload_url
+        run: |
+          url=$(echo "$response" | jq -r '.upload_url')
+          echo "::set-output name=url::$url"
+        env: 
+            response:  ${{ steps.get_latest_release.outputs.data }}
       - name: Upload Windows artifact
         id: upload-windows-artifact 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          # upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url:  ${{steps.get_upload_url.outputs.url}}
           asset_path: ./windows.zip
           asset_name: windows.zip
           asset_content_type: application/zip
@@ -61,4 +90,35 @@ jobs:
           asset_content_type: application/zip
       # I need another action to create choco environment from windows.
       # - name: Upload Package to Chocolatey
-      #   run: choco apikey --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/ && choco push MyPackage.${{ github.run_number }}.nupkg --source https://push.chocolatey.org/
+      #   run: |
+      #      choco apikey --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
+      #      choco push MyPackage.${{ github.run_number }}.nupkg --source https://push.chocolatey.org/
+  publish-npm:
+    needs: npm-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+          scope: '@anyone-developer'
+      - run: npm ci
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  publish-gpr:
+    needs: npm-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@anyone-developer'
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

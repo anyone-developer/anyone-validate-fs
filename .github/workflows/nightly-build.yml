@@ -1,6 +1,21 @@
 name: nightly-build
-on: [push]
+on: 
+  - pull_request
+  - push
 jobs:
+  license-scanning:
+    runs-on: ubuntu-latest
+    name: run fossa scanning to check license conflict
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run FOSSA scan and upload build data
+        uses: fossa-contrib/fossa-action@v1.1.2
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
+          github-token: ${{ github.token }}
   test-action-locally:
     runs-on: ubuntu-latest
     name: run sample test locally
