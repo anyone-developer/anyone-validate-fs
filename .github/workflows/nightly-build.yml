@@ -2,6 +2,9 @@ name: nightly-build
 on: 
   pull_request:
     types: [opened, edited, ready_for_review, reopened, synchronize]
+  push:
+    branches:
+      - develop
 jobs:
   license-scanning:
     runs-on: ubuntu-latest
