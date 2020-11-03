@@ -1,7 +1,7 @@
 name: release-test
-on:
-  schedule:
-    - cron:  '* */1 * * *'
+on: ['push']
+  # schedule:
+  #   - cron:  '* */1 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
