@@ -18,7 +18,7 @@ jobs:
           github-token: ${{ github.token }}
   test-action-locally:
     runs-on: ubuntu-latest
-    name: run sample test locally
+    name: dry run action test
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
           render-layout: "vertical"
   test-package:
     runs-on: ubuntu-latest
-    name: run sample test locally
+    name: dry run test
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
