@@ -1,13 +1,9 @@
 # anyone-validate-fs
 
 ![nightly-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/nightly-build/badge.svg)
-![Release Build](https://github.com/anyone-developer/anyone-validate-fs/workflows/Release%20Build/badge.svg)
-![Node.js Package](https://github.com/anyone-developer/anyone-validate-fs/workflows/Node.js%20Package/badge.svg)
-![License Scanning](https://github.com/anyone-developer/anyone-validate-fs/workflows/License%20Scanning/badge.svg)
-
+![release-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/release-build/badge.svg)
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git.svg?type=small)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git?ref=badge_small)
-[![dependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs)
-[![devDependencies Status](https://david-dm.org/anyone-developer/anyone-validate-fs/dev-status.svg)](https://david-dm.org/anyone-developer/anyone-validate-fs?type=dev)
+[![DependaBot](https://badgen.net/github/dependabot/anyone-developer/anyone-validate-fs)](https://github.com/anyone-developer/anyone-validate-fs/network/updates)
 
 ![version](https://badgen.net/npm/v/anyone-validate-fs)
 ![packagephobia](https://badgen.net/packagephobia/publish/anyone-validate-fs)
