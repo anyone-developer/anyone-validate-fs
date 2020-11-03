@@ -30,9 +30,9 @@ jobs:
         run: npm run build
       - name: Package artifact
         run: |
-          mv dist/anyone-validate-fs-win.exe anyone-validate-fs-win.exe && zip windows.zip anyone-validate-fs-win.exe
-          mv dist/anyone-validate-fs-macos anyone-validate-fs-macos && zip macos.zip anyone-validate-fs-macos
-          mv dist/anyone-validate-fs-linux anyone-validate-fs-linux && zip linux.zip anyone-validate-fs-linux
+          mv build/release/anyone-validate-fs-win.exe anyone-validate-fs-win.exe && zip windows.zip anyone-validate-fs-win.exe
+          mv build/release/anyone-validate-fs-macos anyone-validate-fs-macos && zip macos.zip anyone-validate-fs-macos
+          mv build/release/anyone-validate-fs-linux anyone-validate-fs-linux && zip linux.zip anyone-validate-fs-linux
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
