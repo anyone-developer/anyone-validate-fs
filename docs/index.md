@@ -4,12 +4,8 @@
 ![release-build](https://github.com/anyone-developer/anyone-validate-fs/workflows/release-build/badge.svg)
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git.svg?type=small)](https://app.fossa.com/projects/custom%2B21065%2Fgit%40github.com%3Aanyone-developer%2Fanyone-validate-fs.git?ref=badge_small)
 [![DependaBot](https://badgen.net/github/dependabot/anyone-developer/anyone-validate-fs)](https://github.com/anyone-developer/anyone-validate-fs/network/updates)
-
 ![version](https://badgen.net/npm/v/anyone-validate-fs)
-![packagephobia](https://badgen.net/packagephobia/publish/anyone-validate-fs)
-![packagephobia](https://badgen.net/packagephobia/install/anyone-validate-fs)
 ![license](https://badgen.net/npm/license/anyone-validate-fs)
-
 [![Build Status](https://travis-ci.org/anyone-developer/anyone-validate-fs.svg?branch=main)](https://travis-ci.org/anyone-developer/anyone-validate-fs)
 [![XO code style](https://badgen.net/xo/status/chalk)](https://github.com/xojs/xo)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/anyone-developer/anyone-validate-fs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/anyone-developer/anyone-validate-fs/alerts/)
