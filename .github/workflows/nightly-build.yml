@@ -1,6 +1,8 @@
 name: nightly-build
 on: 
   pull_request:
+    branches:
+      - master
     types: [opened, edited, ready_for_review, reopened, synchronize]
   push:
     branches:

@@ -1,6 +1,6 @@
 on:
-  pull_request:
-    types: [closed]
+  release:
+    types: [published]
 name: release-build
 jobs:
   npm-test:
