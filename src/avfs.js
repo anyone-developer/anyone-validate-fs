@@ -73,8 +73,8 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
       }
 
       readPath = path.normalize(readPath);
-      const ignoreFilesArray = ignoreFiles.split(',').map(i => path.normalize(readPath + path.sep + i));
-      const ignoreDirectoriesArray = ignoreDirectories.split(',').map(i => path.normalize(readPath + path.sep + i));
+      const ignoreFilesArray = ignoreFiles ? ignoreFiles.split(',').map(i => path.normalize(readPath + path.sep + i)) : [];
+      const ignoreDirectoriesArray = ignoreDirectories ? ignoreDirectories.split(',').map(i => path.normalize(readPath + path.sep + i)) : [];
 
       const expectStructure = braces(expansion, {expand: true}).map(i => {
         return path.normalize(i);
