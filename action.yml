@@ -30,4 +30,4 @@ outputs:
     description: 'output of execution'
 runs:
   using: 'node12'
-  main: 'action-main.js'
+  main: 'dist/index.js'

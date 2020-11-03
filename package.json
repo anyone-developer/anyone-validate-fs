@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "node src/test.js",
-    "link": "npm link --force",
-    "cli": "anyone-validate-fs",
     "xo": "xo",
     "xo-fix": "xo --fix",
-    "build": "npm run build-win && npm run build-macos && npm run build-linux",
-    "build-win": "pkg bin/anyone-validate-fs.js -t node12-win-x64 -o dist/anyone-validate-fs-win",
-    "build-macos": "pkg bin/anyone-validate-fs.js -t node12-macos-x64 -o dist/anyone-validate-fs-macos",
-    "build-linux": "pkg bin/anyone-validate-fs.js -t node12-linux-x64 -o dist/anyone-validate-fs-linux"
+    "build": "npm run build-action && npm run build-win && npm run build-macos && npm run build-linux",
+    "build-action": "ncc build action.js --license LICENSE",
+    "build-win": "pkg bin/anyone-validate-fs.js -t node12-win-x64 -o build/release/anyone-validate-fs-win",
+    "build-macos": "pkg bin/anyone-validate-fs.js -t node12-macos-x64 -o build/release/anyone-validate-fs-macos",
+    "build-linux": "pkg bin/anyone-validate-fs.js -t node12-linux-x64 -o build/release/anyone-validate-fs-linux"
   },
   "bin": {
     "anyone-validate-fs": "bin/anyone-validate-fs"
@@ -48,6 +47,7 @@
     "doc": "docs"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.24.1",
     "pkg": "^4.4.9",
     "xo": "^0.34.1"
   }
