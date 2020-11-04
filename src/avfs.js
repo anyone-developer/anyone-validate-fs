@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const treeify = require('treeify');
 const Table = require('tty-table');
 const rdiff = require('recursive-diff');
+const hash = require('object-hash');
 
 this.logger = global.logger ? global.logger : console;
 
@@ -28,12 +29,12 @@ function * diffRows(object) {
 }
 
 function getNextPath(p) {
-  return p.split(path.sep).slice(1).join(path.sep);
+  return p ? p.split(path.sep).slice(1).join(path.sep) : '';
 }
 
 function getNextLevelPath(p) {
-  const paths = p.split(path.sep);
-  if (paths.length > 1) {
+  const paths = p ? p.split(path.sep) : '';
+  if (paths && paths.length > 1) {
     return paths.slice(1).join(path.sep);
   }
 
@@ -41,26 +42,49 @@ function getNextLevelPath(p) {
 }
 
 function getTopLevelPath(p) {
-  return p.split(path.sep)[0];
+  const paths = p.split(path.sep);
+  return paths.length > 1 ? paths[0] : '';
 }
 
 function getTreeNode(array) {
   const object = {};
-  for (const a of array) {
-    const top = getTopLevelPath(a);
-    const next = getNextLevelPath(a);
-    if (!next) {
-      object[top] = 'file';
+  let da = array.map(i => {
+    const top = getTopLevelPath(i);
+    return {
+      path: top ? top : i,
+      directory: Boolean(top)
+    };
+  });
+  da = distinct(da);
+  for (const a of da) {
+    if (!a.directory) {
+      object[a.path] = 'file';
       continue;
     }
 
-    const subArray = array.filter(i => i.startsWith(top)).map(i => getNextLevelPath(i));
-    if (!Object.prototype.hasOwnProperty.call(object, top)) {
-      object[top] = {...getTreeNode(subArray)};
+    const subArray = array.filter(i => i && getNextLevelPath(i) && i.split(path.sep)[0] === a.path).map(i => getNextLevelPath(i));
+    if (a.directory && !Object.prototype.hasOwnProperty.call(object, a.path)) {
+      object[a.path] = {...getTreeNode(subArray)};
     }
   }
 
   return object;
+}
+
+function distinct(a) {
+  const array = a.concat(a);
+  const result = [];
+  const object = {};
+
+  for (const i of array) {
+    const index = hash(i);
+    if (!object[index]) {
+      result.push(i);
+      object[index] = 1;
+    }
+  }
+
+  return result;
 }
 
 module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirectories) {
@@ -94,18 +118,27 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
 
       let actualPath = rrdir.sync(readPath, {
         exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
-        strict: true
+        strict: true,
+        match: {
+          dot: false
+        }
       });
       actualPath = actualPath.map(i => {
-        const p = path.normalize(i.path).slice(readPath.length);
+        let p = '';
+        if (readPath === '.' || readPath === './' || readPath === '.\\') {
+          p = path.normalize(i.path);
+        } else {
+          p = path.normalize(i.path).slice(readPath.length);
+          p = getNextPath(p);
+        }
 
         return {
-          path: getNextPath(path.normalize(p)),
+          path: p,
           directory: i.directory,
           symlink: i.symlink
         };
       }).filter(i => !i.directory);
-      actualPath = [...actualPath.map(i => i.path)];
+      actualPath = [...actualPath.map(i => i.path).filter(i => i)];
       const actualTree = getTreeNode(actualPath);
       const actualTreeHeader = chalk.greenBright.bgYellowBright.bold('[Actual]');
       const actualTreeSubHeader = chalk.greenBright.bold('under: ' + readPath);
@@ -218,6 +251,7 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
       }
     } catch (error) {
       this.logger.error(chalk.red(error.message));
+      this.logger.error(chalk.red(error.stack));
       reject(error);
     } finally {
       if (this.delta && this.delta.length > 0) {
