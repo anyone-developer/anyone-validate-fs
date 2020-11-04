@@ -118,7 +118,10 @@ module.exports.diff = function (readPath, expansion, ignoreFiles, ignoreDirector
 
       let actualPath = rrdir.sync(readPath, {
         exclude: [...ignoreDirectoriesArray, ...ignoreFilesArray],
-        strict: true
+        strict: true,
+        match: {
+          dot: false
+        }
       });
       actualPath = actualPath.map(i => {
         let p = '';
