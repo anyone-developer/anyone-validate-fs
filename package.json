@@ -48,7 +48,7 @@
     "doc": "docs"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.24.1",
+    "@vercel/ncc": "^0.25.0",
     "pkg": "^4.4.9",
     "xo": "^0.34.1"
   }
