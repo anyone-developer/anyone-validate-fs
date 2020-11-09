@@ -13,25 +13,25 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/anyone-developer/anyone-validate-fs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/anyone-developer/anyone-validate-fs/context:javascript)
 [![DeepScan grade](https://deepscan.io/api/teams/11532/projects/14440/branches/269275/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11532&pid=14440&bid=269275)
 
-This github action help you to validate file structure as you expected. The validate rule will follow the brace-expansion. For more official definition, please reference to: https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
+This GitHub action helps you to validate the file structure as you expected. The validate rule will follow the brace-expansion. For a more official definition, please refer to https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion
 
 *If you like my module, please buy me a coffee.*
 
-*More and more tiny and useful github actions modules are on the way. Please donate to me. I accept part time job contract. if you need, please contact me: zhang_nan_163@163.com*
+*More and more tiny and useful GitHub action modules are on the way. Please donate to me. I accept a part-time job contract. if you need, please contact me: zhang_nan_163@163.com*
 
 ## Inputs
 
 ### `brace-expansion`
 
-**Required** brace-expansion of expected directory structure.
+**Required** brace-expansion of the expected directory structure.
 
 ### `ignore-files`
 
-the files you want to ignore. split with comma.
+the files you want to ignore. split with a comma.
 
 ### `ignore-directories`
 
-the directories you want to ignore. split with comma.
+the directories you want to ignore. split with a comma.
 
 ### `read-path`
 
@@ -45,9 +45,9 @@ render diff result with \'vertical\' or \'horizontal\'
 
 ### `output`
 
-output of execution.
+the output of execution.
 
-## Other way usage
+## Other way usages
 
 ### `From NPM for programmatic use`
 
@@ -86,7 +86,7 @@ here is repl.it online editor: https://repl.it/@EdwardRoshan/anyone-validate-fs-
 <img src="https://raw.githubusercontent.com/anyone-developer/anyone-validate-fs/main/misc/module.png" width="500">
 
 
-### `From NPM for using as a command line app`
+### `From NPM for using as a command-line app`
 
 - **npm install -g anyone-validate-fs** to install gobally
 - **anyone-validate-fs -r './sample_folder' -b '{a,b/{ba1,ba2,bb1,bb2},c,d}/{a.qa.config,b.prd.config}' -I ".git" -i "README.md"** to use your bash to execute it.
