@@ -20,6 +20,6 @@ avfs.setRenderLayout(core.getInput('render-layout')).diff(
 
   return error.message;
 }).then(output => {
-  global.logger.setOutput(output);
+  global.logger.setOutput('output', output);
   return this.exitCode;
 });
