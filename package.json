@@ -1,20 +1,18 @@
 {
   "name": "@anyone-developer/anyone-validate-fs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "node src/test.js",
     "xo": "xo",
     "xo-fix": "xo --fix",
     "build": "npm run build-action && npm run build-win && npm run build-macos && npm run build-linux",
     "build-action": "ncc build action.js -m -s --license LICENSE",
-    "build-win": "pkg bin/anyone-validate-fs.js -t node12-win-x64 -o build/release/anyone-validate-fs-win",
-    "build-macos": "pkg bin/anyone-validate-fs.js -t node12-macos-x64 -o build/release/anyone-validate-fs-macos",
-    "build-linux": "pkg bin/anyone-validate-fs.js -t node12-linux-x64 -o build/release/anyone-validate-fs-linux"
-  },
-  "bin": {
-    "anyone-validate-fs": "bin/anyone-validate-fs"
+    "build-win": "pkg src/cli-wrapper.js -t node12-win-x64 -o build/release/anyone-validate-fs-win",
+    "build-macos": "pkg src/cli-wrapper.js -t node12-macos-x64 -o build/release/anyone-validate-fs-macos",
+    "build-linux": "pkg src/cli-wrapper.js -t node12-linux-x64 -o build/release/anyone-validate-fs-linux"
   },
   "repository": "git://github.com/anyone-developer/anyone-validate-fs.git",
   "keywords": [
