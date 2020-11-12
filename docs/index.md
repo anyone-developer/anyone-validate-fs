@@ -60,7 +60,7 @@ the output of execution.
 
 ```javascript
 
-const {avfs} = require('anyone-validate-fs');
+const avfs = require('anyone-validate-fs');
 
 avfs.setRenderLayout('horizontal').diff(
   './sample_folder',

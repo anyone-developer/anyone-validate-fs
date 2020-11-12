@@ -1,11 +1,11 @@
 {
   "name": "@anyone-developer/anyone-validate-fs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "node src/test.js",
+    "test": "node test.js",
     "xo": "xo",
     "xo-fix": "xo --fix",
     "build": "npm run build-action && npm run build-win && npm run build-macos && npm run build-linux",

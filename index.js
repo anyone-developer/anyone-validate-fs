@@ -1,3 +1,1 @@
-const {avfs} = require('./src/avfs.js');
-
-module.exports = avfs;
+module.exports = require('./src/avfs.js');

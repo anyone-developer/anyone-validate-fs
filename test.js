@@ -1,4 +1,4 @@
-const {avfs} = require('./avfs.js');
+const avfs = require('./src/avfs.js');
 
 avfs.setRenderLayout('vertical').diff(
   './sample_folder',

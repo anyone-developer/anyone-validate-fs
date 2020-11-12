@@ -269,5 +269,3 @@ module.exports.setRenderLayout = function (layout) {
   this.layout = layout;
   return module.exports;
 };
-
-module.exports.avfs = module.exports;
