@@ -2,17 +2,14 @@
 // Project: https://github.com/anyone-developer/anyone-validate-fs#readme
 // Definitions by: Zhang Nan <https://github.com/anyone-developer>
 // Definitions: https://github.com/anyone-developer/anyone-validate-fs
-export = avfs;
+declare namespace avfs {
+	export function diff(readPath: string, expansion: string, ignoreFiles: string, ignoreDirectories: string): Promise<diffResult>;
 
-declare type avfs = {
-  setRenderLayout: typeof setRenderLayout;
-  diff: typeof diff;
-};
-
-declare function diff(readPath: string, expansion: string, ignoreFiles: string, ignoreDirectories: string): diffResult | Error;
-
-declare function setRenderLayout(layout: 'vertical' | 'horizontal'): avfs;
+	export function setRenderLayout(layout: 'vertical' | 'horizontal'): typeof avfs;
+}
 
 declare type diffResult = {
-  diff?: string;
+	diff: string;
 };
+
+export = avfs;
