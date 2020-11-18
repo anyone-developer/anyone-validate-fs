@@ -1,6 +1,6 @@
 {
   "name": "@anyone-developer/anyone-validate-fs",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "This action help you to validate file structure as you expected. The validate rule will follow the brace-expansion.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -13,6 +13,10 @@
     "build-win": "pkg src/cli-wrapper.js -t node12-win-x64 -o build/release/anyone-validate-fs-win",
     "build-macos": "pkg src/cli-wrapper.js -t node12-macos-x64 -o build/release/anyone-validate-fs-macos",
     "build-linux": "pkg src/cli-wrapper.js -t node12-linux-x64 -o build/release/anyone-validate-fs-linux"
+  },
+  "bin": {
+    "anyone-validate-fs": "./bin/cli-wrapper.js",
+    "avfs": "./bin/cli-wrapper.js"
   },
   "repository": "git://github.com/anyone-developer/anyone-validate-fs.git",
   "keywords": [

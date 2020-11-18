@@ -1,5 +1,5 @@
 const arg = require('args');
-const avfs = require('./avfs');
+const avfs = require('../src/avfs.js');
 
 function parseArgumentsIntoOptions(rawArgs) {
 	arg
