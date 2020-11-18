@@ -10,9 +10,9 @@
     "xo-fix": "xo --fix",
     "build": "npm run build-action && npm run build-win && npm run build-macos && npm run build-linux",
     "build-action": "ncc build action.js -m -s --license LICENSE",
-    "build-win": "pkg src/cli-wrapper.js -t node12-win-x64 -o build/release/anyone-validate-fs-win",
-    "build-macos": "pkg src/cli-wrapper.js -t node12-macos-x64 -o build/release/anyone-validate-fs-macos",
-    "build-linux": "pkg src/cli-wrapper.js -t node12-linux-x64 -o build/release/anyone-validate-fs-linux"
+    "build-win": "pkg bin/cli-wrapper.js -t node12-win-x64 -o build/release/anyone-validate-fs-win",
+    "build-macos": "pkg bin/cli-wrapper.js -t node12-macos-x64 -o build/release/anyone-validate-fs-macos",
+    "build-linux": "pkg bin/cli-wrapper.js -t node12-linux-x64 -o build/release/anyone-validate-fs-linux"
   },
   "bin": {
     "anyone-validate-fs": "./bin/cli-wrapper.js",
