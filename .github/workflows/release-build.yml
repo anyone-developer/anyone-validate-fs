@@ -48,6 +48,7 @@ jobs:
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
           npm version patch
+      - run: npm ci
       - name: Build project
         run: npm run build
       - name: Package artifact
