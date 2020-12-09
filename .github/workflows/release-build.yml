@@ -44,7 +44,10 @@ jobs:
         with:
           node-version: 12
       - name: Versioning Package
-        run: npm version patch
+        run: |
+          git config --global user.email "zhang_nan_163@163.com"
+          git config --global user.name "Edward-Roshan"
+          npm version patch
       - name: Build project
         run: npm run build
       - name: Package artifact
@@ -108,7 +111,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: '@anyone-developer'
       - name: Versioning Package
-        run: npm version patch    
+        run: |
+          git config --global user.email "zhang_nan_163@163.com"
+          git config --global user.name "Edward-Roshan"
+          npm version patch 
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -124,7 +130,10 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@anyone-developer'
       - name: Versioning Package
-        run: npm version patch
+        run: |
+          git config --global user.email "zhang_nan_163@163.com"
+          git config --global user.name "Edward-Roshan"
+          npm version patch
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -140,7 +149,10 @@ jobs:
         with:
           node-version: 12
       - name: Versioning Package
-        run: npm version patch
+        run: |
+          git config --global user.email "zhang_nan_163@163.com"
+          git config --global user.name "Edward-Roshan"
+          npm version patch
       - name: Import GPG
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v3.0.1
