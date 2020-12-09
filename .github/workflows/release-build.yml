@@ -48,21 +48,6 @@ jobs:
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
           npm version patch
-      - name: Import GPG
-        id: gpg
-        uses: crazy-max/ghaction-import-gpg@v3.0.1
-        with:
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          git-user-signingkey: true
-          git-commit-gpgsign: true
-      - name: Push changes to remote
-        id: create-push-change
-        uses: anyone-developer/anyone-push-back-repo@main
-        with:
-          strategy-option: ours
-          actor: Edward-Roshan
-          actor-email:  zhang_nan_163@163.com
       - run: npm ci
       - name: Build project
         run: npm run build
@@ -154,3 +139,35 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  update-version:
+    needs: [release-build, publish-npm, publish-gpr]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Versioning Package
+        run: |
+          git config --global user.email "zhang_nan_163@163.com"
+          git config --global user.name "Edward-Roshan"
+          npm version patch
+      - name: Import GPG
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v3.0.1
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+          git-commit-gpgsign: true
+      - name: Push changes to remote
+        id: create-push-change
+        uses: anyone-developer/anyone-push-back-repo@main
+        with:
+          strategy-option: ours
+          actor: Edward-Roshan
+          actor-email:  zhang_nan_163@163.com
+  
