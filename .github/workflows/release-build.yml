@@ -48,7 +48,21 @@ jobs:
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
           npm version patch
-          git push origin master
+      - name: Import GPG
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v3.0.1
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+          git-commit-gpgsign: true
+      - name: Push changes to remote
+        id: create-push-change
+        uses: anyone-developer/anyone-push-back-repo@main
+        with:
+          strategy-option: ours
+          actor: Edward-Roshan
+          actor-email:  zhang_nan_163@163.com
       - run: npm ci
       - name: Build project
         run: npm run build
@@ -102,21 +116,6 @@ jobs:
       #   run: |
       #      choco apikey --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
       #      choco push MyPackage.${{ github.run_number }}.nupkg --source https://push.chocolatey.org/
-      - name: Import GPG
-        id: gpg
-        uses: crazy-max/ghaction-import-gpg@v3.0.1
-        with:
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          git-user-signingkey: true
-          git-commit-gpgsign: true
-      - name: Push changes to remote
-        id: create-push-change
-        uses: anyone-developer/anyone-push-back-repo@main
-        with:
-          strategy-option: ours
-          actor: Edward-Roshan
-          actor-email:  zhang_nan_163@163.com
 
   publish-npm:
     needs: dry-run-action-test
