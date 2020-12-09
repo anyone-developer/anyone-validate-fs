@@ -13,8 +13,7 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm test
-
-  test-action-locally:
+  dry-run-action-test:
     needs: npm-test
     runs-on: ubuntu-latest
     name: dry run action test
@@ -33,9 +32,8 @@ jobs:
           ignore-directories: ".git"
           read-path: "./sample_folder"
           render-layout: "vertical"
-
-  build-release:
-    needs: test-action-locally
+  release-build:
+    needs: dry-run-action-test
     name: release-build
     runs-on: ubuntu-latest
     steps:
@@ -99,6 +97,50 @@ jobs:
       #   run: |
       #      choco apikey --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
       #      choco push MyPackage.${{ github.run_number }}.nupkg --source https://push.chocolatey.org/
+  publish-npm:
+    needs: dry-run-action-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+          scope: '@anyone-developer'
+      - name: Versioning Package
+        run: npm version patch    
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  publish-gpr:
+    needs: dry-run-action-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@anyone-developer'
+      - name: Versioning Package
+        run: npm version patch
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  update-version:
+    needs: [release-build, publish-npm, publish-gpr]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Versioning Package
+        run: npm version patch
       - name: Import GPG
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v3.0.1
@@ -114,33 +156,4 @@ jobs:
           strategy-option: ours
           actor: Edward-Roshan
           actor-email:  zhang_nan_163@163.com
-
-  publish-npm:
-    needs: test-action-locally
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-          scope: '@anyone-developer'
-      - run: npm ci
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
-  publish-gpr:
-    needs: test-action-locally
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-          scope: '@anyone-developer'
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  
