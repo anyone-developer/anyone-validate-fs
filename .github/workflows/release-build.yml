@@ -146,6 +146,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.AVOID_INFINITE_LOOP_PAT }}
       - name: Setup node environment
         uses: actions/setup-node@v1
         with:

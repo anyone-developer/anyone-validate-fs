@@ -2,9 +2,6 @@ name: release-test
 on:
   schedule:
     - cron:  '0 9 * * *'
-  push:
-    branches:
-      - main
 jobs:
   build:
     runs-on: ubuntu-latest
