@@ -56,18 +56,23 @@ jobs:
           mv build/release/anyone-validate-fs-win.exe anyone-validate-fs-win.exe && zip windows.zip anyone-validate-fs-win.exe
           mv build/release/anyone-validate-fs-macos anyone-validate-fs-macos && zip macos.zip anyone-validate-fs-macos
           mv build/release/anyone-validate-fs-linux anyone-validate-fs-linux && zip linux.zip anyone-validate-fs-linux
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: regular-release/#${{ github.run_number  }}
+      #     release_name: Regular release(#${{ github.run_number }})
+      #     draft: true
+      #     prerelease: true
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: regular-release/#${{ github.run_number  }}
-          release_name: Regular release(#${{ github.run_number }})
-          draft: true
-          prerelease: true
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Upload Windows artifact
-        id: upload-windows-artifact 
+        id: upload-windows-artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,7 +82,7 @@ jobs:
           asset_name: windows.zip
           asset_content_type: application/zip
       - name: Upload Macos artifact
-        id: upload-macos-artifact 
+        id: upload-macos-artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -87,12 +92,12 @@ jobs:
           asset_name: macos.zip
           asset_content_type: application/zip
       - name: Upload Linux artifact
-        id: upload-linux-artifact 
+        id: upload-linux-artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./linux.zip
           asset_name: linux.zip
           asset_content_type: application/zip
@@ -111,12 +116,12 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-          scope: '@anyone-developer'
+          scope: "@anyone-developer"
       - name: Versioning Package
         run: |
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
-          npm version --commit-hooks false --git-tag-version false patch 
+          npm version --commit-hooks false --git-tag-version false patch
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -130,7 +135,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@anyone-developer'
+          scope: "@anyone-developer"
       - name: Versioning Package
         run: |
           git config --global user.email "zhang_nan_163@163.com"
@@ -169,5 +174,4 @@ jobs:
         with:
           strategy-option: ours
           actor: Edward-Roshan
-          actor-email:  zhang_nan_163@163.com
-  
+          actor-email: zhang_nan_163@163.com
