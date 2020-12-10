@@ -47,7 +47,7 @@ jobs:
         run: |
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
-          npm version patch
+          npm version --commit-hooks false --git-tag-version false patch
       - run: npm ci
       - name: Build project
         run: npm run build
@@ -116,7 +116,7 @@ jobs:
         run: |
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
-          npm version patch 
+          npm version --commit-hooks false --git-tag-version false patch 
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -135,7 +135,7 @@ jobs:
         run: |
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
-          npm version patch
+          npm version --commit-hooks false --git-tag-version false patch
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -146,8 +146,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.AVOID_INFINITE_LOOP_PAT }}
       - name: Setup node environment
         uses: actions/setup-node@v1
         with:
@@ -156,7 +154,7 @@ jobs:
         run: |
           git config --global user.email "zhang_nan_163@163.com"
           git config --global user.name "Edward-Roshan"
-          npm version patch
+          npm version --commit-hooks false --git-tag-version false patch
       - name: Import GPG
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v3.0.1
