@@ -56,16 +56,6 @@ jobs:
           mv build/release/anyone-validate-fs-win.exe anyone-validate-fs-win.exe && zip windows.zip anyone-validate-fs-win.exe
           mv build/release/anyone-validate-fs-macos anyone-validate-fs-macos && zip macos.zip anyone-validate-fs-macos
           mv build/release/anyone-validate-fs-linux anyone-validate-fs-linux && zip linux.zip anyone-validate-fs-linux
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: regular-release/#${{ github.run_number  }}
-      #     release_name: Regular release(#${{ github.run_number }})
-      #     draft: true
-      #     prerelease: true
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.2
@@ -101,16 +91,9 @@ jobs:
           asset_path: ./linux.zip
           asset_name: linux.zip
           asset_content_type: application/zip
-      # I need another action to create choco environment from windows.
-      # - name: Upload Package to Chocolatey
-      #   run: |
-      #      choco apikey --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
-      #      choco push MyPackage.${{ github.run_number }}.nupkg --source https://push.chocolatey.org/
-
   publish-npm:
     needs: dry-run-action-test
     runs-on: ubuntu-latest
-    if: "false"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -130,7 +113,6 @@ jobs:
   publish-gpr:
     needs: dry-run-action-test
     runs-on: ubuntu-latest
-    if: "false"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
