@@ -57,7 +57,7 @@
   "devDependencies": {
     "@vercel/ncc": "^0.25.1",
     "pkg": "^4.4.9",
-    "xo": "^0.36.1"
+    "xo": "^0.45.0"
   },
   "xo": {
     "rules": {
