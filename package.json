@@ -44,7 +44,7 @@
     "chalk": "^4.1.0",
     "object-hash": "^2.0.3",
     "recursive-diff": "^1.0.8",
-    "rrdir": "^8.2.0",
+    "rrdir": "^10.1.0",
     "treeify": "^1.1.0",
     "tty-table": "^4.1.3"
   },
